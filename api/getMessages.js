@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
   const { chat_id } = req.query;
 
-  let query = await supabase
+  let query = supabase
     .from('messages')
     .select('*')
     .order('created_at', { ascending: true });
