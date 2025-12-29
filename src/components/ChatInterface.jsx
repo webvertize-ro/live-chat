@@ -44,6 +44,8 @@ function ChatInterface({ userName, visitorId }) {
 
       const res = await fetch(`/api/getMessages?visitor_id=${visitorId}`);
       const data = await res.json();
+      // fetched messages
+      console.log('fetched messages: ', data);
       setMessages(data.messages || []);
     };
     fetchMessages();
@@ -85,7 +87,7 @@ function ChatInterface({ userName, visitorId }) {
       <Messages>
         {messages.map((msg, i) => (
           <div key={i}>
-            {msg.message}
+            <strong>{msg.user_name}:</strong> {msg.message}
             <div>{msg.created_at}</div>
           </div>
         ))}
