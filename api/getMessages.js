@@ -12,11 +12,16 @@ export default async function handler(req, res) {
 
   const { chat_id } = req.query;
 
-  const { data, error } = await supabase
+  let query = await supabase
     .from('messages')
     .select('*')
-    .order('created_at', { ascending: true })
-    .eq(chat_id ? 'chat_id' : 'id', chat_id);
+    .order('created_at', { ascending: true });
+
+  if (chat_id) {
+    query = query.eq('chat_id', chat_id);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error(error);

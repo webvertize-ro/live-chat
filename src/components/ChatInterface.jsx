@@ -34,6 +34,7 @@ function ChatInterface({ userName, chatId }) {
   const [input, setInput] = useState('');
 
   // Fetch messages initially
+
   useEffect(() => {
     const fetchMessages = async () => {
       const res = await fetch(`/api/getMessages?chat_id=${chatId}`);
@@ -60,8 +61,11 @@ function ChatInterface({ userName, chatId }) {
     const data = await res.json();
 
     if (res.ok && data.success) {
-      setMessages((prev) => [...prev, { user_name: userName, message: input }]);
       setInput('');
+      // re-fetch messages
+      const res = await fetch(`/api/getMessages?chat_id=${chatId}`);
+      const data = await res.json();
+      setMessages(data.messages || []);
     } else {
       console.error(data.error || 'Failed to send message');
     }
