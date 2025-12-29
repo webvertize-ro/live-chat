@@ -34,6 +34,8 @@ function ChatForm() {
         throw new Error('Failed to submit the form!');
       }
 
+      console.log(res.status.message);
+
       reset();
     } catch (error) {
       console.error(error);
