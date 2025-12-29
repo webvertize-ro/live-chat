@@ -79,6 +79,7 @@ function ChatInterface({ userName, chatId }) {
         {messages.map((msg, i) => (
           <div key={i}>
             <strong>{msg.user_name}:</strong> {msg.message}
+            {console.log('the msg looks like this: ', msg)}
           </div>
         ))}
       </Messages>
