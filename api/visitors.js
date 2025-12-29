@@ -20,15 +20,14 @@ export default async function handler(req, res) {
   // Inserting into the database
   const { data: insertedVisitors, error } = await supabase
     .from('visitors')
-    .insert(
-      [
-        {
-          name,
-          phone_number: phoneNumber,
-        },
-      ],
-      { returning: 'representation' }
-    );
+    .insert([
+      {
+        name,
+        phone_number: phoneNumber,
+      },
+    ])
+    .select()
+    .single();
 
   if (error) {
     console.error(error);
@@ -40,6 +39,5 @@ export default async function handler(req, res) {
   return res.status(200).json({
     success: true,
     visitor: newVisitor,
-    message: 'This message was sent from /api/visitors',
   });
 }
