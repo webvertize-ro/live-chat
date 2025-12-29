@@ -7,6 +7,7 @@ const StyledChatInterface = styled.div`
   bottom: 10%;
   right: 100px;
   width: 400px;
+  height: 500px;
   border-radius: 1rem;
   padding: 1rem;
   background-color: lightblue;
@@ -21,6 +22,7 @@ const Header = styled.div`
 const Messages = styled.div`
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 `;
 
 const Footer = styled.div`
