@@ -36,13 +36,12 @@ function ChatInterface({ userName, chatId }) {
   // Fetch messages initially
   useEffect(() => {
     const fetchMessages = async () => {
-      const res = await fetch(`/api/getMessages`);
+      const res = await fetch(`/api/getMessages?chat_id=${chatId}`);
       const data = await res.json();
-      console.log('data in fetchMessages looks like this: ', data);
       setMessages(data.messages || []);
     };
     fetchMessages();
-  }, []);
+  }, [chatId]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -80,7 +79,7 @@ function ChatInterface({ userName, chatId }) {
         {messages.map((msg, i) => (
           <div key={i}>
             <strong>{msg.user_name}:</strong> {msg.message}
-            {console.log('the msg looks like this: ', msg)}
+            <div>{msg.created_at}</div>
           </div>
         ))}
       </Messages>
