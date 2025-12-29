@@ -57,14 +57,14 @@ function ChatForm() {
         )}
       </div>
       <div className="mb-4">
-        <label htmlFor="phone-number" className="form-label">
+        <label htmlFor="phoneNumber" className="form-label">
           Phone Number
         </label>
         <input
           type="text"
           className="form-control"
-          name="phone-number"
-          {...register('phone-number', {
+          name="phoneNumber"
+          {...register('phoneNumber', {
             required: 'Please fill in the phone number!',
           })}
         />
