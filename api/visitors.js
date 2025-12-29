@@ -30,5 +30,10 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Database error' });
   }
 
-  return res.status(200).json({ success: true });
+  return res
+    .status(200)
+    .json({
+      success: true,
+      message: 'This message was sent from /api/visitors',
+    });
 }
