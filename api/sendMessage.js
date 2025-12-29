@@ -9,12 +9,11 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed!' });
   }
+  const { user_name, message, chat_id } = req.body;
 
   if (!user_name || !message) {
     return res.status(400).json({ error: 'Missing required fields!' });
   }
-
-  const { user_name, message, chat_id } = req.body;
 
   if (!user_name || !message) {
     return res.status(400).json({ error: 'Missing required fields' });
