@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     .select('*')
     .order('created_at', { ascending: true });
 
-  if (chat_id) {
+  if (chat_id && chat_id !== 'undefined') {
     query = query.eq('chat_id', chat_id);
   }
 
