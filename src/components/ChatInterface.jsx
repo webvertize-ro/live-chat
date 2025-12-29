@@ -22,6 +22,7 @@ const Header = styled.div`
 const Messages = styled.div`
   display: flex;
   flex-direction: column;
+  height: 400px;
   overflow-y: scroll;
 `;
 
