@@ -42,7 +42,7 @@ function ChatInterface({ userName, visitorId }) {
     const fetchMessages = async () => {
       if (!visitorId) return;
 
-      const res = await fetch(`/api/getMessages?chat_id=${visitorId}`);
+      const res = await fetch(`/api/getMessages?visitor_id=${visitorId}`);
       const data = await res.json();
       setMessages(data.messages || []);
     };

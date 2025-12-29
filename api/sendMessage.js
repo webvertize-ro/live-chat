@@ -17,9 +17,9 @@ export default async function handler(req, res) {
 
   const { data, error } = await supabase
     .from('messages')
-    .insert([{ user_name, message, visitor_id }], {
-      returning: 'representation',
-    });
+    .insert([{ user_name, message, visitor_id }])
+    .select()
+    .single();
 
   if (error) {
     console.error(error);
