@@ -85,7 +85,7 @@ function ChatInterface({ userName, visitorId }) {
       <Messages>
         {messages.map((msg, i) => (
           <div key={i}>
-            <strong>{msg.user_name}:</strong> {msg.message}
+            {msg.message}
             <div>{msg.created_at}</div>
           </div>
         ))}
