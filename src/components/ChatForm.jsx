@@ -35,6 +35,7 @@ function ChatForm() {
       });
       // Parse the JSON body
       const data = await res.json();
+      console.log('API response: ', data);
 
       if (!res.ok) {
         throw new Error('Failed to submit the form!');
