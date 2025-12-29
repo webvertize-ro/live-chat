@@ -29,7 +29,11 @@ function ChatForm() {
         },
         body: JSON.stringify(formData),
       });
-      console.log(res);
+      // Parse the JSON body
+      const data = await res.json();
+
+      console.log('this is data.success', data.success);
+      console.log('this is data.message', data.message);
 
       if (!res.ok) {
         throw new Error('Failed to submit the form!');
