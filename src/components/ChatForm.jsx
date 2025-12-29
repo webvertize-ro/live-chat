@@ -91,7 +91,7 @@ function ChatForm() {
       </div>
     </StyledChatForm>
   ) : (
-    <ChatInterface userName={visitor.name} visitorId={21} />
+    <ChatInterface userName={visitor.name} visitorId={visitor.id} />
   );
 }
 
