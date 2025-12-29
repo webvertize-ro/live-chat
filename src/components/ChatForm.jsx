@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import ChatInterface from './ChatInterface';
 
 const StyledChatForm = styled.form`
   position: absolute;
@@ -14,7 +15,7 @@ const StyledChatForm = styled.form`
 `;
 
 function ChatForm() {
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(true);
 
   const {
     register,
@@ -91,7 +92,7 @@ function ChatForm() {
       </div>
     </StyledChatForm>
   ) : (
-    <div>This will be the chat interface!</div>
+    <ChatInterface />
   );
 }
 
