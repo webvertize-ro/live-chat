@@ -15,14 +15,11 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields!' });
   }
 
-  const { error } = await supabase.from('messages').insert([
-    {
-      visitor_id,
-      user_name,
-      message,
-      sender_type: 'user',
-    },
-  ]);
+  const { data, error } = await supabase
+    .from('messages')
+    .insert([{ user_name, message, visitor_id }], {
+      returning: 'representation',
+    });
 
   if (error) {
     console.error(error);

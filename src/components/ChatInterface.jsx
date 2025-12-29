@@ -32,7 +32,7 @@ const Footer = styled.div`
   padding-top: 0.5rem;
 `;
 
-function ChatInterface({ userName, chatId }) {
+function ChatInterface({ userName, visitorId }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
 
@@ -40,12 +40,14 @@ function ChatInterface({ userName, chatId }) {
 
   useEffect(() => {
     const fetchMessages = async () => {
-      const res = await fetch(`/api/getMessages?chat_id=${chatId}`);
+      if (!visitorId) return;
+
+      const res = await fetch(`/api/getMessages?chat_id=${visitorId}`);
       const data = await res.json();
       setMessages(data.messages || []);
     };
     fetchMessages();
-  }, [chatId]);
+  }, [visitorId]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -57,7 +59,7 @@ function ChatInterface({ userName, chatId }) {
       body: JSON.stringify({
         user_name: userName,
         message: input,
-        chat_id: chatId,
+        visitor_id: visitorId,
       }),
     });
 
@@ -65,10 +67,8 @@ function ChatInterface({ userName, chatId }) {
 
     if (res.ok && data.success) {
       setInput('');
-      // re-fetch messages
-      const res = await fetch(`/api/getMessages?chat_id=${chatId}`);
-      const data = await res.json();
-      setMessages(data.messages || []);
+      // append new message
+      setMessages((prev) => [...prev, data.message]);
     } else {
       console.error(data.error || 'Failed to send message');
     }

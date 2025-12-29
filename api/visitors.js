@@ -18,22 +18,28 @@ export default async function handler(req, res) {
   }
 
   // Inserting into the database
-  const { error } = await supabase.from('visitors').insert([
-    {
-      name,
-      phone_number: phoneNumber,
-    },
-  ]);
+  const { data: insertedVisitors, error } = await supabase
+    .from('visitors')
+    .insert(
+      [
+        {
+          name,
+          phone_number: phoneNumber,
+        },
+      ],
+      { returning: 'representation' }
+    );
 
   if (error) {
     console.error(error);
     return res.status(500).json({ error: 'Database error' });
   }
 
-  return res
-    .status(200)
-    .json({
-      success: true,
-      message: 'This message was sent from /api/visitors',
-    });
+  const newVisitor = insertedVisitors[0];
+
+  return res.status(200).json({
+    success: true,
+    visitor: newVisitor,
+    message: 'This message was sent from /api/visitors',
+  });
 }

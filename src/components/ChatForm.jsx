@@ -15,7 +15,7 @@ const StyledChatForm = styled.form`
 `;
 
 function ChatForm() {
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [visitor, setVisitor] = useState(null);
 
   const {
     register,
@@ -42,7 +42,7 @@ function ChatForm() {
 
       // Mark the form as submitted
       if (data.success) {
-        setIsFormSubmitted(true);
+        setVisitor(data.visitor);
       }
 
       reset();
@@ -51,7 +51,7 @@ function ChatForm() {
     }
   }
 
-  return !isFormSubmitted ? (
+  return !visitor ? (
     <StyledChatForm onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-4">
         <label htmlFor="name" className="form-label">
@@ -92,7 +92,7 @@ function ChatForm() {
       </div>
     </StyledChatForm>
   ) : (
-    <ChatInterface />
+    <ChatInterface userName={visitor.name} visitorId={visitor.id} />
   );
 }
 

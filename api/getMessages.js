@@ -15,6 +15,7 @@ export default async function handler(req, res) {
   let query = supabase
     .from('messages')
     .select('*')
+    .eq('visitor_id', visitor_id)
     .order('created_at', { ascending: true });
 
   if (visitor_id && visitor_id !== 'undefined') {
