@@ -14,7 +14,7 @@ const StyledChatForm = styled.form`
 `;
 
 function ChatForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const {
     register,
@@ -39,8 +39,9 @@ function ChatForm() {
         throw new Error('Failed to submit the form!');
       }
 
+      // Mark the form as submitted
       if (data.success) {
-        setSubmitted(true);
+        setIsFormSubmitted(true);
       }
 
       reset();
@@ -49,52 +50,48 @@ function ChatForm() {
     }
   }
 
-  return (
-    <>
-      {!submitted ? (
-        <StyledChatForm onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
-            <label htmlFor="name" className="form-label">
-              Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              {...register('name', { required: 'Please fill in the name!' })}
-            />
-            {errors?.name && (
-              <small className="text-danger">{errors.name?.message}</small>
-            )}
-          </div>
-          <div className="mb-4">
-            <label htmlFor="phoneNumber" className="form-label">
-              Phone Number
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              name="phoneNumber"
-              {...register('phoneNumber', {
-                required: 'Please fill in the phone number!',
-              })}
-            />
-            {errors?.name && (
-              <small className="text-danger">
-                {errors['phone-number']?.message}
-              </small>
-            )}
-          </div>
-          <div className="mb-4">
-            <button type="submit" className="btn btn-primary">
-              Start conversation
-            </button>
-          </div>
-        </StyledChatForm>
-      ) : (
-        <div>test</div>
-      )}
-    </>
+  return isFormSubmitted ? (
+    <StyledChatForm onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-4">
+        <label htmlFor="name" className="form-label">
+          Name
+        </label>
+        <input
+          type="text"
+          className="form-control"
+          name="name"
+          {...register('name', { required: 'Please fill in the name!' })}
+        />
+        {errors?.name && (
+          <small className="text-danger">{errors.name?.message}</small>
+        )}
+      </div>
+      <div className="mb-4">
+        <label htmlFor="phoneNumber" className="form-label">
+          Phone Number
+        </label>
+        <input
+          type="text"
+          className="form-control"
+          name="phoneNumber"
+          {...register('phoneNumber', {
+            required: 'Please fill in the phone number!',
+          })}
+        />
+        {errors?.name && (
+          <small className="text-danger">
+            {errors['phone-number']?.message}
+          </small>
+        )}
+      </div>
+      <div className="mb-4">
+        <button type="submit" className="btn btn-primary">
+          Start conversation
+        </button>
+      </div>
+    </StyledChatForm>
+  ) : (
+    <div>This will be the chat interface!</div>
   );
 }
 
