@@ -41,9 +41,7 @@ function ChatForm() {
       }
 
       // Mark the form as submitted
-      if (data.success) {
-        setVisitor(data.visitor);
-      }
+      setVisitor(data.visitor);
 
       reset();
     } catch (error) {
