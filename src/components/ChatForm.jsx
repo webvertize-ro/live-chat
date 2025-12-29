@@ -29,12 +29,11 @@ function ChatForm() {
         },
         body: JSON.stringify(formData),
       });
+      console.log(res);
 
       if (!res.ok) {
         throw new Error('Failed to submit the form!');
       }
-
-      console.log(res.status.message);
 
       reset();
     } catch (error) {
