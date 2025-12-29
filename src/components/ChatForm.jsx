@@ -50,7 +50,7 @@ function ChatForm() {
     }
   }
 
-  return isFormSubmitted ? (
+  return !isFormSubmitted ? (
     <StyledChatForm onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-4">
         <label htmlFor="name" className="form-label">
