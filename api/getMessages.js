@@ -10,15 +10,15 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { chat_id } = req.query;
+  const { visitor_id } = req.query;
 
   let query = supabase
     .from('messages')
     .select('*')
     .order('created_at', { ascending: true });
 
-  if (chat_id && chat_id !== 'undefined') {
-    query = query.eq('chat_id', chat_id);
+  if (visitor_id && visitor_id !== 'undefined') {
+    query = query.eq('visitor_id', visitor_id);
   }
 
   const { data, error } = await query;
