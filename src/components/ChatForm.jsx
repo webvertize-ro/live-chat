@@ -92,7 +92,7 @@ function ChatForm() {
       </div>
     </StyledChatForm>
   ) : (
-    <ChatInterface />
+    <ChatInterface chatId={123} />
   );
 }
 
