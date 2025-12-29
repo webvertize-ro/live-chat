@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   }
 
   // Inserting into the database
-  const { data: insertedVisitors, error } = await supabase
+  const { data, error } = await supabase
     .from('visitors')
     .insert([
       {
@@ -34,10 +34,8 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Database error' });
   }
 
-  const newVisitor = insertedVisitors[0];
-
   return res.status(200).json({
     success: true,
-    visitor: newVisitor,
+    visitor: data,
   });
 }
