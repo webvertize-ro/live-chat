@@ -15,7 +15,7 @@ const StyledChatForm = styled.form`
 `;
 
 function ChatForm() {
-  const [isFormSubmitted, setIsFormSubmitted] = useState(true);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const {
     register,
