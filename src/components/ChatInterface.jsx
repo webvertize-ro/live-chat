@@ -89,6 +89,7 @@ function ChatInterface({ userName, visitorId }) {
           <div key={i}>
             <strong>{msg.user_name}:</strong> {msg.message}
             <div>{msg.created_at}</div>
+            <div>Sender type: {msg.sender_type}</div>
           </div>
         ))}
       </Messages>
