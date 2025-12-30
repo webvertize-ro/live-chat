@@ -31,6 +31,14 @@ const MessageBubble = styled.div`
   display: flex;
 `;
 
+const MessageContent = styled.div`
+  display: flex;
+`;
+
+const Message = styled.div``;
+
+const MessageDate = styled.div``;
+
 const Footer = styled.div`
   display: flex;
   border-top: 1px solid black;
@@ -92,9 +100,11 @@ function ChatInterface({ userName, visitorId }) {
       <Messages>
         {messages.map((msg, i) => (
           <MessageBubble key={i} senderType={msg.sender_type}>
-            <strong>{msg.user_name}:</strong> {msg.message}
-            <div>{formatDate(msg.created_at)}</div>
-            <div>Sender type: {msg.sender_type}</div>
+            <strong>{msg.user_name}:</strong>
+            <MessageContent>
+              <Message>{msg.message}</Message>
+              <MessageDate>{formatDate(msg.created_at)}</MessageDate>
+            </MessageContent>
           </MessageBubble>
         ))}
       </Messages>
