@@ -31,7 +31,7 @@ const Messages = styled.div`
 const MessageBubble = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   background-color: lightgreen;
   border-radius: 1rem;
   padding: 0.5rem;
