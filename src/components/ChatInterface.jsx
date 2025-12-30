@@ -113,7 +113,7 @@ function ChatInterface({ userName, visitorId }) {
       </Header>
       {/* Container with messages */}
       <Messages>
-        {/* {messages.map((msg, i) => (
+        {messages.map((msg, i) => (
           <MessageBubble key={i} senderType={msg.sender_type}>
             <strong>{msg.user_name}:</strong>
             <MessageContent>
@@ -121,8 +121,8 @@ function ChatInterface({ userName, visitorId }) {
               <MessageDate>{formatDate(msg.created_at)}</MessageDate>
             </MessageContent>
           </MessageBubble>
-        ))} */}
-        <MessageBubble senderType="user">
+        ))}
+        {/* <MessageBubble senderType="user">
           <MessageContent>
             <MessageName>
               <strong>Dane Hughes</strong>
@@ -130,7 +130,7 @@ function ChatInterface({ userName, visitorId }) {
             <Message>this is a test message</Message>
             <MessageDate>Dec 30, 2025, 02:44 PM</MessageDate>
           </MessageContent>
-        </MessageBubble>
+        </MessageBubble> */}
       </Messages>
       {/* Footer */}
       <Footer>
