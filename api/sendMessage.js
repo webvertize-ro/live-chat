@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
   const { data, error } = await supabase
     .from('messages')
-    .insert([{ user_name, message, visitor_id }])
+    .insert([{ user_name, message, sender_type: 'user', visitor_id }])
     .select()
     .single();
 
