@@ -15,7 +15,7 @@ const StyledChatForm = styled.form`
 `;
 
 function ChatForm() {
-  const [visitor, setVisitor] = useState(1);
+  const [visitor, setVisitor] = useState(null);
 
   const {
     register,
