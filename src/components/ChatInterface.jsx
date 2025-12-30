@@ -23,21 +23,36 @@ const Header = styled.div`
 const Messages = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 0.8rem;
   height: 400px;
   overflow-y: scroll;
 `;
 
 const MessageBubble = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: lightgreen;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  align-self: ${(props) =>
+    props.senderType === 'user' ? 'flex-end' : 'flex-start'};
 `;
 
 const MessageContent = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 
-const Message = styled.div``;
+const Message = styled.div`
+  font-size: 1.2rem;
+`;
 
-const MessageDate = styled.div``;
+const MessageDate = styled.div`
+  font-size: 0.7rem;
+`;
+
+const MessageName = styled.div``;
 
 const Footer = styled.div`
   display: flex;
@@ -98,7 +113,7 @@ function ChatInterface({ userName, visitorId }) {
       </Header>
       {/* Container with messages */}
       <Messages>
-        {messages.map((msg, i) => (
+        {/* {messages.map((msg, i) => (
           <MessageBubble key={i} senderType={msg.sender_type}>
             <strong>{msg.user_name}:</strong>
             <MessageContent>
@@ -106,7 +121,16 @@ function ChatInterface({ userName, visitorId }) {
               <MessageDate>{formatDate(msg.created_at)}</MessageDate>
             </MessageContent>
           </MessageBubble>
-        ))}
+        ))} */}
+        <MessageBubble senderType="user">
+          <MessageContent>
+            <MessageName>
+              <strong>Dane Hughes</strong>
+            </MessageName>
+            <Message>this is a test message</Message>
+            <MessageDate>Dec 30, 2025, 02:44 PM</MessageDate>
+          </MessageContent>
+        </MessageBubble>
       </Messages>
       {/* Footer */}
       <Footer>
