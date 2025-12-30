@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import edionTransLogo from '../assets/ediontrans_logo.svg';
 import { useEffect, useState } from 'react';
+import { formatDate } from '../utils/formatDate';
 
 const StyledChatInterface = styled.div`
   position: absolute;
@@ -24,6 +25,10 @@ const Messages = styled.div`
   flex-direction: column;
   height: 400px;
   overflow-y: scroll;
+`;
+
+const MessageBubble = styled.div`
+  display: flex;
 `;
 
 const Footer = styled.div`
@@ -86,11 +91,11 @@ function ChatInterface({ userName, visitorId }) {
       {/* Container with messages */}
       <Messages>
         {messages.map((msg, i) => (
-          <div key={i}>
+          <MessageBubble key={i} senderType={msg.sender_type}>
             <strong>{msg.user_name}:</strong> {msg.message}
-            <div>{msg.created_at}</div>
+            <div>{formatDate(msg.created_at)}</div>
             <div>Sender type: {msg.sender_type}</div>
-          </div>
+          </MessageBubble>
         ))}
       </Messages>
       {/* Footer */}
