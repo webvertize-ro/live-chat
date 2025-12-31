@@ -89,6 +89,7 @@ function ChatInterface({ userName, visitorId }) {
       body: JSON.stringify({
         user_name: userName,
         message: input,
+        sender_type: 'user',
         visitor_id: visitorId,
       }),
     });

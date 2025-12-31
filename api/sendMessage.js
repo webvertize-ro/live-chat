@@ -9,7 +9,8 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed!' });
   }
-  const { user_name, message, visitor_id } = req.body;
+
+  const { user_name, message, sender_type, visitor_id } = req.body;
 
   if (!message) {
     return res.status(400).json({ error: 'Missing required fields!' });
@@ -17,7 +18,7 @@ export default async function handler(req, res) {
 
   const { data, error } = await supabase
     .from('messages')
-    .insert([{ user_name, message, sender_type: 'user', visitor_id }])
+    .insert([{ user_name, message, sender_type, visitor_id }])
     .select()
     .single();
 
