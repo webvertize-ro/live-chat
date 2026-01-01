@@ -49,7 +49,7 @@ function ChatForm() {
       // Mark the form as submitted
       setVisitor(data.visitor);
       // register the visitorId in the localStorage
-      localStorage.setItem('visitorId', visitor.id);
+      localStorage.setItem('visitorId', visitor?.id);
 
       reset();
     } catch (error) {
