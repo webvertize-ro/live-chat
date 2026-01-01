@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { create } from 'domain';
+
 import formidable from 'formidable';
 import fs from 'fs';
 
@@ -9,7 +9,7 @@ export const config = {
   },
 };
 
-const supabase = create(
+const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
