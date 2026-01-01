@@ -108,26 +108,27 @@ function ChatInterface({ userName, visitorId }) {
   const sendMessage = async (e) => {
     e.preventDefault();
     if (!input) return;
+    try {
+      const res = await fetch('/api/sendMessage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_name: userName,
+          message: input,
+          sender_type: 'user',
+          visitor_id: visitorId,
+        }),
+      });
 
-    const res = await fetch('/api/sendMessage', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        user_name: userName,
-        message: input,
-        sender_type: 'user',
-        visitor_id: visitorId,
-      }),
-    });
+      const data = await res.json();
 
-    const data = await res.json();
-
-    if (res.ok && data.success) {
-      setInput('');
-      // append new message
-      // setMessages((prev) => [...prev, data.message]);
-    } else {
-      console.error(data.error || 'Failed to send message');
+      if (res.ok && data.success) {
+        setInput('');
+        // append new message
+        // setMessages((prev) => [...prev, data.message]);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
