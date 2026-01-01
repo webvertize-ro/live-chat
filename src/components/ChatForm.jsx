@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import ChatInterface from './ChatInterface';
@@ -24,10 +24,19 @@ function ChatForm() {
     reset,
   } = useForm();
 
-  const visitorId = localStorage.getItem('visitorId');
-  if (visitorId) {
-    setVisitor(visitorId);
-  }
+  // load visitor from localStorage
+  useEffect(() => {
+    const storedVisitorId = localStorage.getItem('visitorId');
+    if (!storedVisitorId) return;
+
+    async function fetchVisitor() {
+      const res = await fetch(`/api/visitors?visitorId=${storedVisitorId}`);
+      const data = await res.json();
+      setVisitor(data.visitor);
+    }
+
+    fetchVisitor();
+  }, []);
 
   async function onSubmit(formData) {
     try {
@@ -45,11 +54,11 @@ function ChatForm() {
       if (!res.ok) {
         throw new Error('Failed to submit the form!');
       }
+      // register the visitorId in the localStorage
+      localStorage.setItem('visitorId', data.visitor.id);
 
       // Mark the form as submitted
       setVisitor(data.visitor);
-      // register the visitorId in the localStorage
-      localStorage.setItem('visitorId', visitor?.id);
 
       reset();
     } catch (error) {
