@@ -87,7 +87,7 @@ function ChatInterface({ userName, visitorId }) {
     const channel = supabase
       .channel(`messages-${visitorId}`)
       .on(
-        'postgres-changes',
+        'postgres_changes',
         {
           event: 'INSERT',
           schema: 'public',
@@ -150,15 +150,6 @@ function ChatInterface({ userName, visitorId }) {
             </MessageContent>
           </MessageBubble>
         ))}
-        {/* <MessageBubble senderType="user">
-          <MessageContent>
-            <MessageName>
-              <strong>Dane Hughes</strong>
-            </MessageName>
-            <Message>this is a test message</Message>
-            <MessageDate>Dec 30, 2025, 02:44 PM</MessageDate>
-          </MessageContent>
-        </MessageBubble> */}
       </Messages>
       {/* Footer */}
       <Footer>
