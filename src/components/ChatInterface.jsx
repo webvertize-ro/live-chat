@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import edionTransLogo from '../assets/ediontrans_logo.svg';
 import { useEffect, useState } from 'react';
 import { formatDate } from '../utils/formatDate';
+import { supabase } from '../db/db';
 
 const StyledChatInterface = styled.div`
   position: absolute;
@@ -77,6 +78,31 @@ function ChatInterface({ userName, visitorId }) {
       setMessages(data.messages || []);
     };
     fetchMessages();
+  }, [visitorId]);
+
+  // Subscribe to real-time messages
+  useEffect(() => {
+    if (!visitorId) return;
+
+    const channel = supabase
+      .channel(`messages-${visitorId}`)
+      .on(
+        'postgres-changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'messages',
+          filter: `visitor_id=eq.${visitorId}`,
+        },
+        (payload) => {
+          setMessages((prev) => [...prev, payload.new]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [visitorId]);
 
   const sendMessage = async (e) => {
