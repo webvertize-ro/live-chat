@@ -24,6 +24,11 @@ function ChatForm() {
     reset,
   } = useForm();
 
+  const visitorId = localStorage.getItem('visitorId');
+  if (visitorId) {
+    setVisitor(visitorId);
+  }
+
   async function onSubmit(formData) {
     try {
       const res = await fetch('/api/visitors', {
@@ -43,6 +48,8 @@ function ChatForm() {
 
       // Mark the form as submitted
       setVisitor(data.visitor);
+      // register the visitorId in the localStorage
+      localStorage.setItem('visitorId', visitor.id);
 
       reset();
     } catch (error) {
