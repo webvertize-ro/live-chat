@@ -80,7 +80,7 @@ function ChatInterface({ userName, visitorId }) {
     fetchMessages();
   }, [visitorId]);
 
-  // Subscribe to real-time messages
+  // Subscribe to real-time
   useEffect(() => {
     if (!visitorId) return;
 
