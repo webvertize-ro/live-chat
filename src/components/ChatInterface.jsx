@@ -125,7 +125,7 @@ function ChatInterface({ userName, visitorId }) {
     if (res.ok && data.success) {
       setInput('');
       // append new message
-      setMessages((prev) => [...prev, data.message]);
+      // setMessages((prev) => [...prev, data.message]);
     } else {
       console.error(data.error || 'Failed to send message');
     }
