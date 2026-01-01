@@ -3,6 +3,9 @@ import edionTransLogo from '../assets/ediontrans_logo.svg';
 import { useEffect, useState } from 'react';
 import { formatDate } from '../utils/formatDate';
 import { supabase } from '../db/db';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX } from '@fortawesome/free-solid-svg-icons/faX';
 
 const StyledChatInterface = styled.div`
   position: absolute;
@@ -27,6 +30,17 @@ const Messages = styled.div`
   gap: 0.8rem;
   height: 400px;
   overflow-y: scroll;
+`;
+
+const PreviewContainer = styled.div`
+  margin-bottom: 0.5rem;
+  background: #fff;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+`;
+
+const StyledButton = styled.button`
+  margin-left: 0.5rem;
 `;
 
 const MessageBubble = styled.div`
@@ -64,6 +78,8 @@ const Footer = styled.div`
 function ChatInterface({ userName, visitorId }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const [attachment, setAttachment] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
 
   // Fetch messages initially
 
@@ -111,29 +127,47 @@ function ChatInterface({ userName, visitorId }) {
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    if (!input) return;
-    try {
-      const res = await fetch('/api/sendMessage', {
+
+    if (!input && !attachment) return;
+
+    let fileData = null;
+
+    if (attachment) {
+      const formData = new FormData();
+      formData.append('file', attachment);
+      formData.append('visitor_id', visitorId);
+
+      const uploadRes = await fetch('/api/uploadAttachment', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          user_name: userName,
-          message: input,
-          sender_type: 'user',
-          visitor_id: visitorId,
-        }),
+        body: formData,
       });
 
-      const data = await res.json();
-
-      if (res.ok && data.success) {
-        setInput('');
-        // append new message
-        // setMessages((prev) => [...prev, data.message]);
-      }
-    } catch (error) {
-      console.error(error);
+      fileData = await uploadRes.json();
     }
+
+    // Send message (text + optional file)
+    await fetch('/api/sendMessage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_name: userName,
+        message: input || null,
+        sender_type: 'user',
+        visitor_id: visitorId,
+        type: attachment
+          ? attachment.type.startsWith('image')
+            ? 'image'
+            : 'file'
+          : 'text',
+        file_url: fileData?.url,
+        file_name: fileData?.name,
+        file_mime: fileData?.mime,
+      }),
+    });
+
+    // Reset UI
+    setInput('');
+    clearAttachment();
   };
 
   const handleFileUpload = async (file) => {
@@ -148,7 +182,7 @@ function ChatInterface({ userName, visitorId }) {
 
     const uploadData = await uploadRes.json();
 
-    await fetch('/api/sendMessage', {
+    const res = await fetch('/api/sendMessage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -161,6 +195,28 @@ function ChatInterface({ userName, visitorId }) {
         file_mime: uploadData.mime,
       }),
     });
+
+    if (res.ok) {
+      setInput('');
+    }
+  };
+
+  const handleSelectFile = (file) => {
+    if (!file) return;
+
+    setAttachment(file);
+
+    if (file.type.startsWith('image/')) {
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+    } else {
+      setPreviewUrl(null);
+    }
+  };
+
+  const clearAttachment = () => {
+    setAttachment(null);
+    setPreviewUrl(null);
   };
 
   return (
@@ -190,6 +246,21 @@ function ChatInterface({ userName, visitorId }) {
           </MessageBubble>
         ))}
       </Messages>
+
+      {/* Small Preview */}
+      {attachment && (
+        <PreviewContainer>
+          {previewUrl ? (
+            <img src={previewUrl} width="100" />
+          ) : (
+            <div>{attachment.name}</div>
+          )}
+          <StyledButton type="button" onClick={clearAttachment}>
+            <FontAwesomeIcon icon={faXmark} />
+          </StyledButton>
+        </PreviewContainer>
+      )}
+
       {/* Footer */}
       <Footer>
         <form onSubmit={sendMessage} className="d-flex">
@@ -201,7 +272,7 @@ function ChatInterface({ userName, visitorId }) {
           />
           <input
             type="file"
-            onChange={(e) => handleFileUpload(e.target.files[0])}
+            onChange={(e) => handleSelectFile(e.target.files[0])}
           />
           <button type="submit" className="btn btn-primary">
             Trimite
