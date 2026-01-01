@@ -100,6 +100,8 @@ function ChatInterface({ userName, visitorId }) {
       )
       .subscribe();
 
+    console.log('Subscribing to realtime for', visitorId);
+
     return () => {
       supabase.removeChannel(channel);
     };
