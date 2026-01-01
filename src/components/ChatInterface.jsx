@@ -136,6 +136,33 @@ function ChatInterface({ userName, visitorId }) {
     }
   };
 
+  const handleFileUpload = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('visitor_id', visitorId);
+
+    const uploadRes = await fetch('/api/uploadAttachment', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const uploadData = await uploadRes.json();
+
+    await fetch('/api/sendMessage', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user_name: userName,
+        sender_type: 'user',
+        visitor_id: visitorId,
+        type: file.type.startsWith('image') ? 'image' : 'file',
+        file_url: uploadData.url,
+        file_name: uploadData.name,
+        file_mime: uploadData.mime,
+      }),
+    });
+  };
+
   return (
     <StyledChatInterface>
       {/* Header */}
@@ -149,7 +176,15 @@ function ChatInterface({ userName, visitorId }) {
           <MessageBubble key={i} senderType={msg.sender_type}>
             <strong>{msg.user_name}:</strong>
             <MessageContent>
-              <Message>{msg.message}</Message>
+              {msg.type === 'text' && <Message>{msg.message}</Message>}
+              {msg.type === 'image' && (
+                <img src={msg.file_url} alt={msg.file_name} width="100" />
+              )}
+              {msg.type === 'file' && (
+                <a href={msg.file_url} target="_blank">
+                  {msg.file_name}
+                </a>
+              )}
               <MessageDate>{formatDate(msg.created_at)}</MessageDate>
             </MessageContent>
           </MessageBubble>
@@ -163,6 +198,10 @@ function ChatInterface({ userName, visitorId }) {
             placeholder="Type your message here..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
+          />
+          <input
+            type="file"
+            onChange={(e) => handleFileUpload(e.target.files[0])}
           />
           <button type="submit" className="btn btn-primary">
             Trimite
