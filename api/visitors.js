@@ -6,36 +6,61 @@ const supabase = createClient(
 );
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed!' });
+  if (req.method === 'POST') {
+    const { name, phoneNumber } = req.body;
+
+    // Validation
+    if (!name || !phoneNumber) {
+      return res.status(400).json({ error: 'Missing fields!' });
+    }
+
+    // Inserting into the database
+    const { data, error } = await supabase
+      .from('visitors')
+      .insert([
+        {
+          name,
+          phone_number: phoneNumber,
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Database error' });
+    }
+
+    return res.status(200).json({
+      success: true,
+      visitor: data,
+    });
   }
 
-  const { name, phoneNumber } = req.body;
+  if (req.method === 'GET') {
+    const { visitorId } = req.query;
 
-  // Validation
-  if (!name || !phoneNumber) {
-    return res.status(400).json({ error: 'Missing fields!' });
+    if (!visitorId) {
+      return res.status(400).json({ error: 'Missing visitorId' });
+    }
+
+    const { data, error } = await supabase
+      .from('visitors')
+      .select('*')
+      .eq('id', visitorId)
+      .single();
+
+    if (error) {
+      console.error(error);
+      return res.status(404).json({ error: 'Visitor not found' });
+    }
+
+    return res.status(200).json({
+      success: true,
+      visitor: data,
+    });
   }
 
-  // Inserting into the database
-  const { data, error } = await supabase
-    .from('visitors')
-    .insert([
-      {
-        name,
-        phone_number: phoneNumber,
-      },
-    ])
-    .select()
-    .single();
-
-  if (error) {
-    console.error(error);
-    return res.status(500).json({ error: 'Database error' });
-  }
-
-  return res.status(200).json({
-    success: true,
-    visitor: data,
-  });
+  // Method not allowed
+  return res.status(405).json({ error: 'Method not allowed' });
 }
