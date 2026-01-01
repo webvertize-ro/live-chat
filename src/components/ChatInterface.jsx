@@ -95,15 +95,17 @@ function ChatInterface({ userName, visitorId }) {
           filter: `visitor_id=eq.${visitorId}`,
         },
         (payload) => {
-          setMessages((prev) => [...prev, payload.new]);
+          setMessages((prev) => {
+            const exists = prev.some((msg) => msg.id === payload.new.id);
+            if (exists) return prev;
+            return [...prev, payload.new];
+          });
         }
       )
       .subscribe();
 
-    console.log('Subscribing to realtime for', visitorId);
-
     return () => {
-      supabase.removeChannel(channel);
+      channel.unsubscribe();
     };
   }, [visitorId]);
 
