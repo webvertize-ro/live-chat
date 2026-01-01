@@ -16,6 +16,7 @@ const StyledChatForm = styled.form`
 
 function ChatForm() {
   const [visitor, setVisitor] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const {
     register,
@@ -27,12 +28,22 @@ function ChatForm() {
   // load visitor from localStorage
   useEffect(() => {
     const storedVisitorId = localStorage.getItem('visitorId');
-    if (!storedVisitorId) return;
+    if (!storedVisitorId) {
+      setIsLoading(false);
+      return;
+    }
 
     async function fetchVisitor() {
-      const res = await fetch(`/api/visitors?visitorId=${storedVisitorId}`);
-      const data = await res.json();
-      setVisitor(data.visitor);
+      try {
+        const res = await fetch(`/api/visitors?visitorId=${storedVisitorId}`);
+        const data = await res.json();
+        setVisitor(data.visitor);
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem('visitorId');
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     fetchVisitor();
@@ -64,6 +75,10 @@ function ChatForm() {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  if (isLoading) {
+    return null;
   }
 
   return !visitor ? (
