@@ -12,6 +12,7 @@ const StyledChatForm = styled.form`
   bottom: 10%;
   right: 100px;
   width: 400px;
+  height: 500px;
   border-radius: 1rem;
   padding: 1rem;
   background-color: #fff;
@@ -144,15 +145,19 @@ function ChatForm() {
     }
   }
 
-  if (isLoading) {
-    return (
-      <LoadingComponentContainer>
-        <LoadingComponent />;
-      </LoadingComponentContainer>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <LoadingComponentContainer>
+  //       <LoadingComponent />;
+  //     </LoadingComponentContainer>
+  //   );
+  // }
 
-  return !visitor ? (
+  return isLoading ? (
+    <StyledChatForm onSubmit={handleSubmit(onSubmit)}>
+      <LoadingComponent />
+    </StyledChatForm>
+  ) : !visitor ? (
     <StyledChatForm onSubmit={handleSubmit(onSubmit)}>
       <LogoContainer className="mb-3">
         <Logo src={edionLogo} alt="" />
