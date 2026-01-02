@@ -80,9 +80,8 @@ const StyledButton = styled.button`
   border-radius: 0.5rem;
 `;
 
-function ChatForm() {
+function ChatForm({ onLoading }) {
   const [visitor, setVisitor] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   const {
     register,
@@ -95,7 +94,7 @@ function ChatForm() {
   useEffect(() => {
     const storedVisitorId = localStorage.getItem('visitorId');
     if (!storedVisitorId) {
-      // setIsLoading(false);
+      onLoading(false);
       return;
     }
 
@@ -108,7 +107,7 @@ function ChatForm() {
         console.error(error);
         localStorage.removeItem('visitorId');
       } finally {
-        // setIsLoading(false);
+        onLoading(false);
       }
     }
 
@@ -143,9 +142,9 @@ function ChatForm() {
     }
   }
 
-  if (isLoading) {
-    return <LoadingComponent />;
-  }
+  // if (isLoading) {
+  //   return <LoadingComponent />;
+  // }
 
   return !visitor ? (
     <StyledChatForm onSubmit={handleSubmit(onSubmit)}>

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { faComments } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import LoadingComponent from './LoadingComponent';
 
 const ChatButtonContainer = styled.div`
   display: flex;
@@ -36,9 +37,8 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
   color: #fff;
 `;
 
-function ChatButton({ onOpenForm }) {
+function ChatButton({ onOpenForm, isLoading }) {
   const [isChatOpen, setIsChatOpen] = useState(false);
-
   function handleChatOpen() {
     setIsChatOpen((prev) => !prev);
     onOpenForm();
@@ -47,7 +47,13 @@ function ChatButton({ onOpenForm }) {
   return (
     <ChatButtonContainer>
       {!isChatOpen ? (
-        <ChatMessage>Discută cu un reprezentant Edion Trans!</ChatMessage>
+        <ChatMessage>
+          {isLoading ? (
+            <LoadingComponent />
+          ) : (
+            'Discută cu un reprezentant Edion Trans!'
+          )}
+        </ChatMessage>
       ) : (
         ''
       )}

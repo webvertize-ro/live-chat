@@ -18,6 +18,7 @@ console.log('the error is: ', error);
 
 function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleOpenForm() {
     setIsFormOpen(!isFormOpen);
@@ -25,8 +26,8 @@ function App() {
 
   return (
     <StyledChatContainer>
-      {isFormOpen ? <ChatForm /> : ''}
-      <ChatButton onOpenForm={handleOpenForm} />
+      {isFormOpen ? <ChatForm onLoading={setIsLoading} /> : ''}
+      <ChatButton onOpenForm={handleOpenForm} isLoading={isLoading} />
     </StyledChatContainer>
   );
 }
