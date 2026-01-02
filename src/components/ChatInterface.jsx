@@ -81,6 +81,12 @@ const Footer = styled.div`
   padding-top: 0.5rem;
 `;
 
+const SendMessageForm = styled.form`
+  width: 100%;
+  gap: 0.5rem;
+  align-items: center;
+`;
+
 function ChatInterface({ userName, visitorId }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
@@ -238,7 +244,7 @@ function ChatInterface({ userName, visitorId }) {
 
       {/* Footer */}
       <Footer>
-        <form onSubmit={sendMessage} className="d-flex">
+        <SendMessageForm onSubmit={sendMessage} className="d-flex">
           <FileInput onSelectFile={handleSelectFile} />
           <StyledInput
             type="text"
@@ -250,7 +256,7 @@ function ChatInterface({ userName, visitorId }) {
           <StyledSendButton type="submit" className="btn btn-primary">
             <FontAwesomeIcon icon={faPaperPlane} />
           </StyledSendButton>
-        </form>
+        </SendMessageForm>
       </Footer>
     </StyledChatInterface>
   );
