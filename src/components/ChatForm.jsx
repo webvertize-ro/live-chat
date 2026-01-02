@@ -13,10 +13,6 @@ const StyledChatForm = styled.form`
   right: 100px;
   width: 400px;
   height: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   border-radius: 1rem;
   padding: 1rem;
   background-color: #fff;
