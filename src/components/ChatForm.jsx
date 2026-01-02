@@ -5,6 +5,7 @@ import ChatInterface from './ChatInterface';
 import edionLogo from '../assets/ediontrans_logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import LoadingComponent from './LoadingComponent';
 
 const StyledChatForm = styled.form`
   position: absolute;
@@ -138,7 +139,7 @@ function ChatForm() {
   }
 
   if (isLoading) {
-    return null;
+    return <LoadingComponent />;
   }
 
   return !visitor ? (
