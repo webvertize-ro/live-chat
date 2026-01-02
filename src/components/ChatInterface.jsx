@@ -19,7 +19,9 @@ const StyledChatInterface = styled.div`
   color: #000;
 `;
 
-const StyledInput = styled.input``;
+const StyledInput = styled.input`
+  font-size: 1.2rem;
+`;
 
 const StyledSendButton = styled.button``;
 
