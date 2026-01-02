@@ -27,11 +27,11 @@ const StyledSendButton = styled.button``;
 const Header = styled.div`
   display: flex;
   border-bottom: 1px solid black;
+  flex-direction: column;
 `;
 
 const HeaderTop = styled.div`
   display: flex;
-  flex-direction: column;
   gap: 1rem;
 `;
 
