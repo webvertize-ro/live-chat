@@ -258,7 +258,10 @@ function ChatInterface({ userName, visitorId }) {
           />
           <StyledSendButton type="submit" className="btn btn-primary">
             {loadingSendMessage ? (
-              <div className="spinner-border text-primary" role="status">
+              <div
+                className="spinner-border spinner-border-sm text-primary"
+                role="status"
+              >
                 <span className="visually-hidden">Loading...</span>
               </div>
             ) : (
