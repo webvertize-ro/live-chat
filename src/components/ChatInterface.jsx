@@ -25,13 +25,27 @@ const StyledSendButton = styled.button``;
 
 const Header = styled.div`
   display: flex;
-  border-bottom: 1px solid black;
   flex-direction: column;
+  padding: 0.75rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-color: rgb(148, 185, 54);
+  border-bottom: 2px solid #fff;
+  color: black;
 `;
 
 const HeaderTop = styled.div`
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const LogoImg = styled.img`
+  width: 30px;
+`;
+
+const StyledH5 = styled.h5`
+  margin: 0;
 `;
 
 const HeaderMessage = styled.div`
@@ -40,7 +54,7 @@ const HeaderMessage = styled.div`
 `;
 
 const StyledP = styled.p`
-  margin: 0;
+  margin: 0 !important;
 `;
 
 const Messages = styled.div`
@@ -49,6 +63,20 @@ const Messages = styled.div`
   gap: 0.8rem;
   height: 400px;
   overflow-y: scroll;
+  background-color: rgb(9, 78, 46);
+
+  &::-webkit-scrollbar {
+    width: 1em;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #382933;
+    outline: 1px solid slategrey;
+  }
 `;
 
 const PreviewContainer = styled.div`
@@ -66,7 +94,8 @@ const MessageBubble = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-color: lightgreen;
+  background-color: #fff;
+  color: #3b5249;
   border-radius: 1rem;
   padding: 0.5rem;
   align-self: ${(props) =>
@@ -90,8 +119,13 @@ const MessageName = styled.div``;
 
 const Footer = styled.div`
   display: flex;
-  border-top: 1px solid black;
-  padding-top: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  border-top: 2px solid #fff;
+  padding: 0.5rem;
+  background-color: #519872;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 `;
 
 const SendMessageForm = styled.form`
@@ -101,7 +135,15 @@ const SendMessageForm = styled.form`
 `;
 
 function ChatInterface({ userName, visitorId }) {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    {
+      id: 100,
+      visitor_id: 62,
+      message: 'hello',
+      user_name: 'daniel',
+      sender_type: 'user',
+    },
+  ]);
   const [input, setInput] = useState('');
   const [attachment, setAttachment] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -221,8 +263,8 @@ function ChatInterface({ userName, visitorId }) {
       {/* Header */}
       <Header>
         <HeaderTop>
-          <img src={edionTransLogo} width="30" />
-          <h5>Asistență clienți</h5>
+          <LogoImg src={edionTransLogo} />
+          <StyledH5>Asistență clienți</StyledH5>
         </HeaderTop>
         <HeaderMessage>
           <StyledP>Bun venit, {userName}!</StyledP>
@@ -269,7 +311,7 @@ function ChatInterface({ userName, visitorId }) {
           <FileInput onSelectFile={handleSelectFile} />
           <StyledInput
             type="text"
-            placeholder="Type your message here..."
+            placeholder="Scrieți mesajul aici..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
             className="form-control"
