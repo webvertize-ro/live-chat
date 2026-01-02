@@ -12,7 +12,6 @@ const StyledChatForm = styled.form`
   bottom: 10%;
   right: 100px;
   width: 400px;
-  height: 500px;
   border-radius: 1rem;
   padding: 1rem;
   background-color: #fff;
@@ -78,7 +77,7 @@ const StyledButton = styled.button`
 
 function ChatForm() {
   const [visitor, setVisitor] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const {
     register,
@@ -171,9 +170,7 @@ function ChatForm() {
           className="form-control p-2"
           placeholder="Introduceți numele complet"
           name="name"
-          {...register('name', {
-            required: 'Va rugam introduceti numele!',
-          })}
+          {...register('name', { required: 'Va rugam introduceti numele!' })}
         />
         {errors?.name && (
           <small className="text-danger">{errors.name?.message}</small>
