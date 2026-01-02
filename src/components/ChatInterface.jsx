@@ -30,6 +30,16 @@ const Header = styled.div`
   border-bottom: 1px solid black;
 `;
 
+const HeaderTop = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+const HeaderMessage = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Messages = styled.div`
   display: flex;
   flex-direction: column;
@@ -207,9 +217,13 @@ function ChatInterface({ userName, visitorId }) {
     <StyledChatInterface>
       {/* Header */}
       <Header>
-        <img src={edionTransLogo} width="30" />
-        <h3>Asistență clienți</h3>
-        <p>Bun venit, {userName}!</p>
+        <HeaderTop>
+          <img src={edionTransLogo} width="30" />
+          <h5>Asistență clienți</h5>
+        </HeaderTop>
+        <HeaderMessage>
+          <p>Bun venit, {userName}!</p>
+        </HeaderMessage>
       </Header>
       {/* Container with messages */}
       <Messages>
