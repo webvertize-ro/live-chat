@@ -76,6 +76,7 @@ const Messages = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: #382933;
     outline: 1px solid slategrey;
+    border-radius: 0.5rem;
   }
 `;
 
@@ -135,15 +136,7 @@ const SendMessageForm = styled.form`
 `;
 
 function ChatInterface({ userName, visitorId }) {
-  const [messages, setMessages] = useState([
-    {
-      id: 100,
-      visitor_id: 62,
-      message: 'hello',
-      user_name: 'daniel',
-      sender_type: 'user',
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [attachment, setAttachment] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);

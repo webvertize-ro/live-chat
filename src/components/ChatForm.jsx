@@ -148,71 +148,70 @@ function ChatForm() {
     }
   }
 
-  // return isLoading ? (
-  //   <StyledChatForm onSubmit={handleSubmit(onSubmit)} isLoading={isLoading}>
-  //     <LoadingComponent />
-  //   </StyledChatForm>
-  // ) : !visitor ? (
-  //   <StyledChatForm onSubmit={handleSubmit(onSubmit)}>
-  //     <LogoContainer className="mb-3">
-  //       <Logo src={edionLogo} alt="" />
-  //       <LogoText className="d-flex flex-column">
-  //         <StyledSpan className="logo-text">Edion Trans</StyledSpan>
-  //         <StyledSmall className="logo-subtext ms-1">
-  //           Servicii de transport
-  //         </StyledSmall>
-  //       </LogoText>
-  //     </LogoContainer>
-  //     <WelcomeContainer>
-  //       <WelcomeMessage>Bun venit!</WelcomeMessage>
-  //       <WelcomeInfo>
-  //         Introduceți numele și numărul de telefon pentru a începe o conversație
-  //         în timp real.
-  //       </WelcomeInfo>
-  //     </WelcomeContainer>
+  return isLoading ? (
+    <StyledChatForm onSubmit={handleSubmit(onSubmit)} isLoading={isLoading}>
+      <LoadingComponent />
+    </StyledChatForm>
+  ) : !visitor ? (
+    <StyledChatForm onSubmit={handleSubmit(onSubmit)}>
+      <LogoContainer className="mb-3">
+        <Logo src={edionLogo} alt="" />
+        <LogoText className="d-flex flex-column">
+          <StyledSpan className="logo-text">Edion Trans</StyledSpan>
+          <StyledSmall className="logo-subtext ms-1">
+            Servicii de transport
+          </StyledSmall>
+        </LogoText>
+      </LogoContainer>
+      <WelcomeContainer>
+        <WelcomeMessage>Bun venit!</WelcomeMessage>
+        <WelcomeInfo>
+          Introduceți numele și numărul de telefon pentru a începe o conversație
+          în timp real.
+        </WelcomeInfo>
+      </WelcomeContainer>
 
-  //     <div className="mb-4">
-  //       <label htmlFor="name" className="form-label">
-  //         Nume Complet
-  //       </label>
-  //       <input
-  //         type="text"
-  //         className="form-control p-2"
-  //         placeholder="Introduceți numele complet"
-  //         name="name"
-  //         {...register('name', { required: 'Va rugam introduceti numele!' })}
-  //       />
-  //       {errors?.name && (
-  //         <small className="text-danger">{errors.name?.message}</small>
-  //       )}
-  //     </div>
-  //     <div className="mb-4">
-  //       <label htmlFor="phoneNumber" className="form-label">
-  //         Număr de telefon
-  //       </label>
-  //       <input
-  //         type="text"
-  //         className="form-control p-2"
-  //         placeholder="Introduceți numărul de telefon"
-  //         name="phoneNumber"
-  //         {...register('phoneNumber', {
-  //           required: 'Va rugam introduceti numarul de telefon!',
-  //         })}
-  //       />
-  //       {errors?.phoneNumber && (
-  //         <small className="text-danger">
-  //           {errors['phoneNumber']?.message}
-  //         </small>
-  //       )}
-  //     </div>
-  //     <div className="mb-4">
-  //       <StyledButton type="submit">Începe conversația</StyledButton>
-  //     </div>
-  //   </StyledChatForm>
-  // ) : (
-  //   <ChatInterface userName={visitor.name} visitorId={visitor.id} />
-  // );
-  return <ChatInterface userName="Ion Ionescu" visitorId={34} />;
+      <div className="mb-4">
+        <label htmlFor="name" className="form-label">
+          Nume Complet
+        </label>
+        <input
+          type="text"
+          className="form-control p-2"
+          placeholder="Introduceți numele complet"
+          name="name"
+          {...register('name', { required: 'Va rugam introduceti numele!' })}
+        />
+        {errors?.name && (
+          <small className="text-danger">{errors.name?.message}</small>
+        )}
+      </div>
+      <div className="mb-4">
+        <label htmlFor="phoneNumber" className="form-label">
+          Număr de telefon
+        </label>
+        <input
+          type="text"
+          className="form-control p-2"
+          placeholder="Introduceți numărul de telefon"
+          name="phoneNumber"
+          {...register('phoneNumber', {
+            required: 'Va rugam introduceti numarul de telefon!',
+          })}
+        />
+        {errors?.phoneNumber && (
+          <small className="text-danger">
+            {errors['phoneNumber']?.message}
+          </small>
+        )}
+      </div>
+      <div className="mb-4">
+        <StyledButton type="submit">Începe conversația</StyledButton>
+      </div>
+    </StyledChatForm>
+  ) : (
+    <ChatInterface userName={visitor.name} visitorId={visitor.id} />
+  );
 }
 
 export default ChatForm;

@@ -3,6 +3,7 @@ import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
 const StyledLabel = styled.label`
+  font-size: 1.4rem;
   &:hover {
     cursor: pointer;
   }
