@@ -66,6 +66,7 @@ const Messages = styled.div`
   height: 400px;
   overflow-y: scroll;
   background-color: rgb(9, 78, 46);
+  padding: 1rem;
 
   &::-webkit-scrollbar {
     width: 0.5rem;
@@ -76,7 +77,7 @@ const Messages = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #382933;
+    background-color: #519872;
     outline: 1px solid slategrey;
     border-radius: 0.5rem;
   }
