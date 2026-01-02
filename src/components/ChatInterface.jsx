@@ -66,7 +66,7 @@ const Messages = styled.div`
   background-color: rgb(9, 78, 46);
 
   &::-webkit-scrollbar {
-    width: 1em;
+    width: 0.5rem;
   }
 
   &::-webkit-scrollbar-track {
