@@ -15,7 +15,6 @@ const StyledChatInterface = styled.div`
   right: 100px;
   width: 400px;
   border-radius: 1rem;
-  padding: 1rem;
   background-color: lightblue;
   color: #000;
 `;
@@ -38,6 +37,10 @@ const HeaderTop = styled.div`
 const HeaderMessage = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const StyledP = styled.p`
+  margin: 0;
 `;
 
 const Messages = styled.div`
@@ -222,7 +225,7 @@ function ChatInterface({ userName, visitorId }) {
           <h5>Asistență clienți</h5>
         </HeaderTop>
         <HeaderMessage>
-          <p>Bun venit, {userName}!</p>
+          <StyledP>Bun venit, {userName}!</StyledP>
         </HeaderMessage>
       </Header>
       {/* Container with messages */}
