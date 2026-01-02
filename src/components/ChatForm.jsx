@@ -100,7 +100,7 @@ function ChatForm() {
   useEffect(() => {
     const storedVisitorId = localStorage.getItem('visitorId');
     if (!storedVisitorId) {
-      // setIsLoading(false);
+      setIsLoading(false);
       return;
     }
 
@@ -113,7 +113,7 @@ function ChatForm() {
         console.error(error);
         localStorage.removeItem('visitorId');
       } finally {
-        // setIsLoading(false);
+        setIsLoading(false);
       }
     }
 
@@ -147,14 +147,6 @@ function ChatForm() {
       console.error(error);
     }
   }
-
-  // if (isLoading) {
-  //   return (
-  //     <LoadingComponentContainer>
-  //       <LoadingComponent />;
-  //     </LoadingComponentContainer>
-  //   );
-  // }
 
   return isLoading ? (
     <StyledChatForm onSubmit={handleSubmit(onSubmit)} isLoading={isLoading}>
