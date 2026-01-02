@@ -23,11 +23,11 @@ const StyledInput = styled.input`
   font-size: 1.2rem;
 `;
 
-const StyledSendButton = styled.button``;
-
-const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
+const StyledSendButton = styled.button`
   font-size: 1.2rem;
 `;
+
+const StyledFontAwesomeIcon = styled(FontAwesomeIcon)``;
 
 const Header = styled.div`
   display: flex;
