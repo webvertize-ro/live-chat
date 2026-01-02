@@ -2,7 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
-const StyledLabel = styled.label``;
+const StyledLabel = styled.label`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 const StyledInput = styled.input`
   display: none;
 `;

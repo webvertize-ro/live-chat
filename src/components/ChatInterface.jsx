@@ -25,12 +25,6 @@ const StyledInput = styled.input``;
 
 const StyledSendButton = styled.button``;
 
-const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 const Header = styled.div`
   display: flex;
   border-bottom: 1px solid black;
@@ -271,7 +265,7 @@ function ChatInterface({ userName, visitorId }) {
                 <span className="visually-hidden">Loading...</span>
               </div>
             ) : (
-              <StyledFontAwesomeIcon icon={faPaperPlane} />
+              <FontAwesomeIcon icon={faPaperPlane} />
             )}
           </StyledSendButton>
         </SendMessageForm>
