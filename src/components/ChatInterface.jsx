@@ -257,7 +257,11 @@ function ChatInterface({ userName, visitorId }) {
             className="form-control"
           />
           <StyledSendButton type="submit" className="btn btn-primary">
-            <FontAwesomeIcon icon={faPaperPlane} />
+            {loadingSendMessage ? (
+              'loading'
+            ) : (
+              <FontAwesomeIcon icon={faPaperPlane} />
+            )}
           </StyledSendButton>
         </SendMessageForm>
       </Footer>
