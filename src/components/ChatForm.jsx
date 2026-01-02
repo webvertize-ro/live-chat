@@ -20,6 +20,12 @@ const StyledChatForm = styled.form`
   color: #000;
 `;
 
+const LoadingComponentContainer = styled.div`
+  position: absolute;
+  right: 200px;
+  bottom: 100px;
+`;
+
 const Logo = styled.img`
   width: 50px;
 `;
@@ -139,7 +145,11 @@ function ChatForm() {
   }
 
   if (isLoading) {
-    return <LoadingComponent />;
+    return (
+      <LoadingComponentContainer>
+        <LoadingComponent />;
+      </LoadingComponentContainer>
+    );
   }
 
   return !visitor ? (
