@@ -92,6 +92,7 @@ function ChatInterface({ userName, visitorId }) {
   const [input, setInput] = useState('');
   const [attachment, setAttachment] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [loadingSendMessage, setLoadingSendMessage] = useState(false);
 
   // Fetch messages initially
 
@@ -139,6 +140,7 @@ function ChatInterface({ userName, visitorId }) {
 
   const sendMessage = async (e) => {
     e.preventDefault();
+    setLoadingSendMessage(true);
 
     if (!input && !attachment) return;
 
@@ -180,6 +182,7 @@ function ChatInterface({ userName, visitorId }) {
     // Reset UI
     setInput('');
     clearAttachment();
+    setLoadingSendMessage(false);
   };
 
   const handleSelectFile = (file) => {
