@@ -14,7 +14,6 @@ const StyledChatInterface = styled.div`
   bottom: 10%;
   right: 100px;
   width: 400px;
-  height: 500px;
   border-radius: 1rem;
   padding: 1rem;
   background-color: lightblue;
