@@ -37,7 +37,7 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
   color: #fff;
 `;
 
-function ChatButton({ onOpenForm, isLoading }) {
+function ChatButton({ onOpenForm }) {
   const [isChatOpen, setIsChatOpen] = useState(false);
   function handleChatOpen() {
     setIsChatOpen((prev) => !prev);
@@ -47,13 +47,7 @@ function ChatButton({ onOpenForm, isLoading }) {
   return (
     <ChatButtonContainer>
       {!isChatOpen ? (
-        <ChatMessage>
-          {isLoading ? (
-            <LoadingComponent />
-          ) : (
-            'Discută cu un reprezentant Edion Trans!'
-          )}
-        </ChatMessage>
+        <ChatMessage>Discută cu un reprezentant Edion Trans!</ChatMessage>
       ) : (
         ''
       )}
