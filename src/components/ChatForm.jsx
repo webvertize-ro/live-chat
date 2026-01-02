@@ -97,7 +97,7 @@ function ChatForm() {
   useEffect(() => {
     const storedVisitorId = localStorage.getItem('visitorId');
     if (!storedVisitorId) {
-      setIsLoading(false);
+      // setIsLoading(false);
       return;
     }
 
@@ -110,7 +110,7 @@ function ChatForm() {
         console.error(error);
         localStorage.removeItem('visitorId');
       } finally {
-        setIsLoading(false);
+        // setIsLoading(false);
       }
     }
 
