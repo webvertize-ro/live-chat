@@ -13,6 +13,9 @@ const StyledChatForm = styled.form`
   right: 100px;
   width: 400px;
   height: 500px;
+  display: ${(props) => (props.isLoading ? 'flex' : 'unset')};
+  align-items: ${(props) => (props.isLoading ? 'center' : 'unset')};
+  justify-content: ${(props) => (props.isLoading ? 'center' : 'unset')};
   border-radius: 1rem;
   padding: 1rem;
   background-color: #fff;
@@ -154,7 +157,7 @@ function ChatForm() {
   // }
 
   return isLoading ? (
-    <StyledChatForm onSubmit={handleSubmit(onSubmit)}>
+    <StyledChatForm onSubmit={handleSubmit(onSubmit)} isLoading={isLoading}>
       <LoadingComponent />
     </StyledChatForm>
   ) : !visitor ? (
