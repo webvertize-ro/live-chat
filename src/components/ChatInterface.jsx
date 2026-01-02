@@ -170,37 +170,6 @@ function ChatInterface({ userName, visitorId }) {
     clearAttachment();
   };
 
-  const handleFileUpload = async (file) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('visitor_id', visitorId);
-
-    const uploadRes = await fetch('/api/uploadAttachment', {
-      method: 'POST',
-      body: formData,
-    });
-
-    const uploadData = await uploadRes.json();
-
-    const res = await fetch('/api/sendMessage', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        user_name: userName,
-        sender_type: 'user',
-        visitor_id: visitorId,
-        type: file.type.startsWith('image') ? 'image' : 'file',
-        file_url: uploadData.url,
-        file_name: uploadData.name,
-        file_mime: uploadData.mime,
-      }),
-    });
-
-    if (res.ok) {
-      setInput('');
-    }
-  };
-
   const handleSelectFile = (file) => {
     if (!file) return;
 
@@ -247,7 +216,7 @@ function ChatInterface({ userName, visitorId }) {
         ))}
       </Messages>
 
-      {/* Small Preview */}
+      {/* Small File Preview */}
       {attachment && (
         <PreviewContainer>
           {previewUrl ? (
