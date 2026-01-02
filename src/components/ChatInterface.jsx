@@ -7,6 +7,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons/faX';
 import FileInput from './FileInput';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 const StyledChatInterface = styled.div`
   position: absolute;
@@ -19,6 +20,10 @@ const StyledChatInterface = styled.div`
   background-color: lightblue;
   color: #000;
 `;
+
+const StyledInput = styled.input``;
+
+const StyledSendButton = styled.button``;
 
 const Header = styled.div`
   display: flex;
@@ -234,16 +239,17 @@ function ChatInterface({ userName, visitorId }) {
       {/* Footer */}
       <Footer>
         <form onSubmit={sendMessage} className="d-flex">
-          <input
+          <FileInput onSelectFile={handleSelectFile} />
+          <StyledInput
             type="text"
             placeholder="Type your message here..."
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            className="form-control"
           />
-          <FileInput onSelectFile={handleSelectFile} />
-          <button type="submit" className="btn btn-primary">
-            Trimite
-          </button>
+          <StyledSendButton type="submit" className="btn btn-primary">
+            <FontAwesomeIcon icon={faPaperPlane} />
+          </StyledSendButton>
         </form>
       </Footer>
     </StyledChatInterface>
