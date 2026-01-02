@@ -1,3 +1,4 @@
+import '../App.css';
 import styled from 'styled-components';
 import ChatButton from './components/ChatButton';
 import ChatForm from './components/ChatForm';

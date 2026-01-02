@@ -1,6 +1,19 @@
 import styled from 'styled-components';
-import { faCommentDots } from '@fortawesome/free-regular-svg-icons';
+import { faComments } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
+
+const ChatButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const ChatMessage = styled.div`
+  background-color: #b1df37;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+`;
 
 const StyledButton = styled.button`
   display: flex;
@@ -9,9 +22,9 @@ const StyledButton = styled.button`
   /* position: absolute; */
 
   border: none;
-  padding: 0.5rem;
+  padding: 1rem;
   border-radius: 50%;
-  background-color: green;
+  background-color: #1ca079;
 
   &:hover {
     cursor: pointer;
@@ -20,13 +33,29 @@ const StyledButton = styled.button`
 
 const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
   font-size: 2rem;
+  color: #fff;
 `;
 
 function ChatButton({ onOpenForm }) {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  function handleChatOpen() {
+    setIsChatOpen((prev) => !prev);
+    onOpenForm();
+  }
+
   return (
-    <StyledButton onClick={() => onOpenForm()}>
-      <StyledFontAwesomeIcon icon={faCommentDots} />
-    </StyledButton>
+    <ChatButtonContainer>
+      {!isChatOpen ? (
+        <ChatMessage>Discuta cu un reprezentant Edion Trans!</ChatMessage>
+      ) : (
+        ''
+      )}
+
+      <StyledButton onClick={() => handleChatOpen()}>
+        <StyledFontAwesomeIcon icon={faComments} />
+      </StyledButton>
+    </ChatButtonContainer>
   );
 }
 

@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import ChatInterface from './ChatInterface';
+import edionLogo from '../assets/ediontrans_logo.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 const StyledChatForm = styled.form`
   position: absolute;
@@ -10,8 +13,65 @@ const StyledChatForm = styled.form`
   width: 400px;
   border-radius: 1rem;
   padding: 1rem;
-  background-color: lightblue;
+  background-color: #fff;
+  border: 3px solid #1ca079;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   color: #000;
+`;
+
+const Logo = styled.img`
+  width: 50px;
+`;
+
+const LogoText = styled.div``;
+
+const LogoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+`;
+
+const WelcomeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const WelcomeMessage = styled.h3`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+`;
+
+const WelcomeInfo = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  text-align: center;
+  color: rgb(75 85 99);
+`;
+
+const StyledSpan = styled.span`
+  font-family: 'EspumaPro-Bold';
+  color: hsl(162, 70%, 37%);
+  font-size: 2.2rem;
+`;
+
+const StyledSmall = styled.small`
+  margin-top: -12px;
+  text-transform: uppercase;
+  font-size: 1rem;
+`;
+
+const StyledButton = styled.button`
+  background-color: rgb(255, 107, 0);
+  color: #fff;
+  width: 100%;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
 `;
 
 function ChatForm() {
@@ -83,15 +143,33 @@ function ChatForm() {
 
   return !visitor ? (
     <StyledChatForm onSubmit={handleSubmit(onSubmit)}>
+      <LogoContainer className="mb-3">
+        <Logo src={edionLogo} alt="" />
+        <LogoText className="d-flex flex-column">
+          <StyledSpan className="logo-text">Edion Trans</StyledSpan>
+          <StyledSmall className="logo-subtext ms-1">
+            Servicii de transport
+          </StyledSmall>
+        </LogoText>
+      </LogoContainer>
+      <WelcomeContainer>
+        <WelcomeMessage>Bun venit!</WelcomeMessage>
+        <WelcomeInfo>
+          Introduceți numele și numărul de telefon pentru a începe o conversație
+          în timp real.
+        </WelcomeInfo>
+      </WelcomeContainer>
+
       <div className="mb-4">
         <label htmlFor="name" className="form-label">
-          Name
+          Nume Complet
         </label>
         <input
           type="text"
-          className="form-control"
+          className="form-control p-2"
+          placeholder="Introduceți numele complet"
           name="name"
-          {...register('name', { required: 'Please fill in the name!' })}
+          {...register('name', { required: 'Va rugam introduceti numele!' })}
         />
         {errors?.name && (
           <small className="text-danger">{errors.name?.message}</small>
@@ -99,26 +177,25 @@ function ChatForm() {
       </div>
       <div className="mb-4">
         <label htmlFor="phoneNumber" className="form-label">
-          Phone Number
+          Număr de telefon
         </label>
         <input
           type="text"
-          className="form-control"
+          className="form-control p-2"
+          placeholder="Introduceți numărul de telefon"
           name="phoneNumber"
           {...register('phoneNumber', {
-            required: 'Please fill in the phone number!',
+            required: 'Va rugam introduceti numarul de telefon!',
           })}
         />
-        {errors?.name && (
+        {errors?.phoneNumber && (
           <small className="text-danger">
-            {errors['phone-number']?.message}
+            {errors['phoneNumber']?.message}
           </small>
         )}
       </div>
       <div className="mb-4">
-        <button type="submit" className="btn btn-primary">
-          Start conversation
-        </button>
+        <StyledButton type="submit">Începe conversația</StyledButton>
       </div>
     </StyledChatForm>
   ) : (
