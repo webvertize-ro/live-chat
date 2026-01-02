@@ -138,9 +138,9 @@ function ChatForm() {
     }
   }
 
-  if (isLoading) {
-    return <LoadingComponent />;
-  }
+  // if (isLoading) {
+  //   return <LoadingComponent />;
+  // }
 
   return !visitor ? (
     <StyledChatForm onSubmit={handleSubmit(onSubmit)}>
