@@ -6,6 +6,7 @@ import { supabase } from '../db/db';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons/faX';
+import FileInput from './FileInput';
 
 const StyledChatInterface = styled.div`
   position: absolute;
@@ -239,10 +240,7 @@ function ChatInterface({ userName, visitorId }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
-          <input
-            type="file"
-            onChange={(e) => handleSelectFile(e.target.files[0])}
-          />
+          <FileInput onSelectFile={handleSelectFile} />
           <button type="submit" className="btn btn-primary">
             Trimite
           </button>
