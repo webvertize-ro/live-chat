@@ -208,7 +208,8 @@ function ChatInterface({ userName, visitorId }) {
       {/* Header */}
       <Header>
         <img src={edionTransLogo} width="30" />
-        Welcome to the chat interface!
+        <h3>Asistență clienți</h3>
+        <p>Bun venit, {userName}!</p>
       </Header>
       {/* Container with messages */}
       <Messages>
