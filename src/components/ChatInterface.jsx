@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons/faX';
 import FileInput from './FileInput';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import LoadingComponent from './LoadingComponent';
 
 const StyledChatInterface = styled.div`
   position: absolute;
@@ -323,25 +324,27 @@ function ChatInterface({ userName, visitorId }) {
       </Header>
       {/* Container with messages */}
       <Messages>
-        {loadingMessages
-          ? 'Messages are loading...'
-          : messages.map((msg, i) => (
-              <MessageBubble key={i} senderType={msg.sender_type}>
-                <strong>{msg.user_name}:</strong>
-                <MessageContent>
-                  {msg.type === 'text' && <Message>{msg.message}</Message>}
-                  {msg.type === 'image' && (
-                    <img src={msg.file_url} alt={msg.file_name} width="100" />
-                  )}
-                  {msg.type === 'file' && (
-                    <a href={msg.file_url} target="_blank">
-                      {msg.file_name}
-                    </a>
-                  )}
-                  <MessageDate>{formatDate(msg.created_at)}</MessageDate>
-                </MessageContent>
-              </MessageBubble>
-            ))}
+        {loadingMessages ? (
+          <LoadingComponent />
+        ) : (
+          messages.map((msg, i) => (
+            <MessageBubble key={i} senderType={msg.sender_type}>
+              <strong>{msg.user_name}:</strong>
+              <MessageContent>
+                {msg.type === 'text' && <Message>{msg.message}</Message>}
+                {msg.type === 'image' && (
+                  <img src={msg.file_url} alt={msg.file_name} width="100" />
+                )}
+                {msg.type === 'file' && (
+                  <a href={msg.file_url} target="_blank">
+                    {msg.file_name}
+                  </a>
+                )}
+                <MessageDate>{formatDate(msg.created_at)}</MessageDate>
+              </MessageContent>
+            </MessageBubble>
+          ))
+        )}
         <div ref={messagesEndRef}></div>
       </Messages>
 
