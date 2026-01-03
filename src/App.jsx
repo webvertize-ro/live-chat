@@ -25,7 +25,8 @@ function App() {
 
   return (
     <StyledChatContainer>
-      {isFormOpen ? <ChatForm /> : <ChatButton onOpenForm={handleOpenForm} />}
+      {isFormOpen ? <ChatForm /> : ''}
+      <ChatButton onOpenForm={handleOpenForm} />
     </StyledChatContainer>
   );
 }
