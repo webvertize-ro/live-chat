@@ -183,6 +183,7 @@ function ChatInterface({ userName, visitorId }) {
   const [attachment, setAttachment] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [loadingSendMessage, setLoadingSendMessage] = useState(false);
+  const [loadingMessages, setLoadingMessages] = useState(false);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = (behavior = 'smooth') => {
@@ -193,6 +194,7 @@ function ChatInterface({ userName, visitorId }) {
   useEffect(() => {
     const fetchMessages = async () => {
       if (!visitorId) return;
+      setLoadingMessages(true);
 
       const res = await fetch(`/api/getMessages?visitor_id=${visitorId}`);
       const data = await res.json();
@@ -200,6 +202,7 @@ function ChatInterface({ userName, visitorId }) {
 
       setMessages(data.messages || []);
 
+      setLoadingMessages(false);
       // Scroll immediately after initial load
       setTimeout(() => scrollToBottom('auto'), 0);
     };
@@ -320,23 +323,25 @@ function ChatInterface({ userName, visitorId }) {
       </Header>
       {/* Container with messages */}
       <Messages>
-        {messages.map((msg, i) => (
-          <MessageBubble key={i} senderType={msg.sender_type}>
-            <strong>{msg.user_name}:</strong>
-            <MessageContent>
-              {msg.type === 'text' && <Message>{msg.message}</Message>}
-              {msg.type === 'image' && (
-                <img src={msg.file_url} alt={msg.file_name} width="100" />
-              )}
-              {msg.type === 'file' && (
-                <a href={msg.file_url} target="_blank">
-                  {msg.file_name}
-                </a>
-              )}
-              <MessageDate>{formatDate(msg.created_at)}</MessageDate>
-            </MessageContent>
-          </MessageBubble>
-        ))}
+        {loadingMessages
+          ? 'Messages are loading...'
+          : messages.map((msg, i) => (
+              <MessageBubble key={i} senderType={msg.sender_type}>
+                <strong>{msg.user_name}:</strong>
+                <MessageContent>
+                  {msg.type === 'text' && <Message>{msg.message}</Message>}
+                  {msg.type === 'image' && (
+                    <img src={msg.file_url} alt={msg.file_name} width="100" />
+                  )}
+                  {msg.type === 'file' && (
+                    <a href={msg.file_url} target="_blank">
+                      {msg.file_name}
+                    </a>
+                  )}
+                  <MessageDate>{formatDate(msg.created_at)}</MessageDate>
+                </MessageContent>
+              </MessageBubble>
+            ))}
         <div ref={messagesEndRef}></div>
       </Messages>
 
