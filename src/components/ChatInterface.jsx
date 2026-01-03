@@ -327,7 +327,7 @@ function ChatInterface({ userName, visitorId }) {
       {/* Container with messages */}
       <Messages loadingMessages={loadingMessages}>
         {loadingMessages ? (
-          <LoadingComponent color="#5C6F2B" />
+          <LoadingComponent color="#094e2e" />
         ) : (
           messages.map((msg, i) => (
             <MessageBubble key={i} senderType={msg.sender_type}>

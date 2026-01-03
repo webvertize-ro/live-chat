@@ -150,7 +150,7 @@ function ChatForm() {
 
   return isLoading ? (
     <StyledChatForm onSubmit={handleSubmit(onSubmit)} isLoading={isLoading}>
-      <LoadingComponent />
+      <LoadingComponent color="#094e2e" />
     </StyledChatForm>
   ) : !visitor ? (
     <StyledChatForm onSubmit={handleSubmit(onSubmit)}>
