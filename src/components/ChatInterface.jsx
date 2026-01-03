@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import edionTransLogo from '../assets/ediontrans_logo.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { formatDate } from '../utils/formatDate';
 import { supabase } from '../db/db';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -174,6 +174,11 @@ function ChatInterface({ userName, visitorId }) {
   const [attachment, setAttachment] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [loadingSendMessage, setLoadingSendMessage] = useState(false);
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = (behavior = 'smooth') => {
+    messagesEndRef.current?.scrollIntoView({ behavior });
+  };
 
   // Fetch messages initially
 
@@ -184,11 +189,20 @@ function ChatInterface({ userName, visitorId }) {
       const res = await fetch(`/api/getMessages?visitor_id=${visitorId}`);
       const data = await res.json();
       // fetched messages
-      console.log('fetched messages: ', data);
+
       setMessages(data.messages || []);
+
+      // Scroll immediately after initial load
+      setTimeout(() => scrollToBottom('auto'), 0);
     };
     fetchMessages();
   }, [visitorId]);
+
+  // Scroll when a new message arrives
+  useEffect(() => {
+    if (messages.length === 0) return;
+    scrollToBottom();
+  }, [messages.length]);
 
   // Subscribe to real-time
   useEffect(() => {
@@ -315,6 +329,7 @@ function ChatInterface({ userName, visitorId }) {
             </MessageContent>
           </MessageBubble>
         ))}
+        <div ref={messagesEndRef}></div>
       </Messages>
 
       {/* Small File Preview */}
