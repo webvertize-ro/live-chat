@@ -25,7 +25,7 @@ const StyledChatForm = styled.form`
     bottom: 70px;
     right: 30px;
     width: 300px;
-    height: 500px;
+    height: 550px;
   }
 `;
 
