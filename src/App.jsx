@@ -9,6 +9,11 @@ const StyledChatContainer = styled.div`
   position: absolute;
   right: 2rem;
   bottom: 5%;
+
+  @media (max-width: 576px) {
+    right: 1rem;
+    bottom: 1rem;
+  }
 `;
 
 const { data, error } = await supabase.from('visitors').select('*');
