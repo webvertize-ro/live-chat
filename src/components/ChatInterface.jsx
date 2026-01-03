@@ -172,6 +172,7 @@ const MessageContent = styled.div`
 
 const StyledLink = styled.a`
   max-width: 325px;
+  word-wrap: break-word;
 
   @media (max-width: 576px) {
     max-width: 250px;
