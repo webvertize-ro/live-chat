@@ -1,8 +1,14 @@
-function LoadingComponent() {
+import styled from 'styled-components';
+
+const Spinner = styled.div`
+  color: ${(props) => (props.color ? props.color : '#000')};
+`;
+
+function LoadingComponent({ color }) {
   return (
-    <div className="spinner-border text-info" role="status">
+    <Spinner className="spinner-border" role="status" color={color}>
       <span className="visually-hidden">Loading...</span>
-    </div>
+    </Spinner>
   );
 }
 
