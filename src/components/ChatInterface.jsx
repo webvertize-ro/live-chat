@@ -88,8 +88,7 @@ const Messages = styled.div`
 `;
 
 const PreviewContainer = styled.div`
-  margin-bottom: 0.5rem;
-  background: #fff;
+  background-color: lightgrey;
   padding: 0.5rem;
   border-radius: 0.5rem;
 `;
@@ -294,6 +293,8 @@ function ChatInterface({ userName, visitorId }) {
       {/* Small File Preview */}
       {attachment && (
         <PreviewContainer>
+          <h6>Previzualizare {previewUrl ? 'imagine' : 'document'}</h6>
+          <div></div>
           {previewUrl ? (
             <img src={previewUrl} width="100" />
           ) : (
