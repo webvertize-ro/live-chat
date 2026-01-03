@@ -102,6 +102,8 @@ const ImageAndName = styled.div`
 const Messages = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: ${(props) => (props.loadingMessages ? 'center' : 'unset')};
+  justify-content: ${(props) => (props.loadingMessages ? 'center' : 'unset')};
   gap: 0.8rem;
   height: 400px;
   overflow-y: scroll;
@@ -323,7 +325,7 @@ function ChatInterface({ userName, visitorId }) {
         </HeaderMessage>
       </Header>
       {/* Container with messages */}
-      <Messages>
+      <Messages loadingMessages={loadingMessages}>
         {loadingMessages ? (
           <LoadingComponent />
         ) : (
