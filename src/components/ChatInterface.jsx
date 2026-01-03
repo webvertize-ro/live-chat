@@ -32,6 +32,10 @@ const StyledSendButton = styled.button`
   color: #fff;
 `;
 
+const Spinner = styled.div`
+  color: black;
+`;
+
 const StyledFontAwesomeIcon = styled(FontAwesomeIcon)``;
 
 const Header = styled.div`
@@ -367,12 +371,12 @@ function ChatInterface({ userName, visitorId }) {
           />
           <StyledSendButton type="submit">
             {loadingSendMessage ? (
-              <div
-                className="spinner-border spinner-border-sm text-info"
+              <Spinner
+                className="spinner-border spinner-border-sm"
                 role="status"
               >
                 <span className="visually-hidden">Loading...</span>
-              </div>
+              </Spinner>
             ) : (
               <StyledFontAwesomeIcon icon={faPaperPlane} />
             )}
