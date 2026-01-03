@@ -368,7 +368,7 @@ function ChatInterface({ userName, visitorId }) {
             onChange={(e) => setInput(e.target.value)}
             className="form-control"
           />
-          <StyledSendButton type="submit">
+          <StyledSendButton type="submit" disabled={input ? 'false' : 'true'}>
             {loadingSendMessage ? (
               <Spinner
                 className="spinner-border spinner-border-sm"
