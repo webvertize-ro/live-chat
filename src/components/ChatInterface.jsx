@@ -3,7 +3,7 @@ import edionTransLogo from '../assets/ediontrans_logo.svg';
 import { useEffect, useRef, useState } from 'react';
 import { formatDate } from '../utils/formatDate';
 import { supabase } from '../db/db';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faWindowMinimize, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons/faX';
 import FileInput from './FileInput';
@@ -73,6 +73,12 @@ const LogoImg = styled.img`
 
 const StyledH5 = styled.h5`
   margin: 0;
+`;
+
+const MinimizeButton = styled.button`
+  border: none;
+  background-color: transparent;
+  color: #1e5128;
 `;
 
 const HeaderMessage = styled.div`
@@ -330,11 +336,13 @@ function ChatInterface({ userName, visitorId, onOpenForm }) {
         <HeaderTop>
           <LogoImg src={edionTransLogo} />
           <StyledH5>Asistență clienți</StyledH5>
+          <MinimizeButton onClick={() => onOpenForm()}>
+            <FontAwesomeIcon icon={faWindowMinimize} />
+          </MinimizeButton>
         </HeaderTop>
         <HeaderMessage>
           <StyledP>Bun venit, {userName}!</StyledP>
         </HeaderMessage>
-        <button onClick={() => onOpenForm()}>minimize</button>
       </Header>
       {/* Container with messages */}
       <Messages loadingMessages={loadingMessages}>
