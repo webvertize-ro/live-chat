@@ -65,6 +65,10 @@ const HeaderTop = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
+  @media (max-widht: 576px) {
+    justify-content: space-between;
+  }
 `;
 
 const LogoImg = styled.img`
