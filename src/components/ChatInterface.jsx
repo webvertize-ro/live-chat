@@ -63,6 +63,11 @@ const StyledP = styled.p`
   margin: 0 !important;
 `;
 
+const PreviewP = styled.p`
+  margin: 0 !important;
+  color: #fff;
+`;
+
 const Messages = styled.div`
   display: flex;
   flex-direction: column;
@@ -88,13 +93,14 @@ const Messages = styled.div`
 `;
 
 const PreviewContainer = styled.div`
-  background-color: lightgrey;
+  background-color: #75b06f;
   padding: 0.5rem;
-  border-radius: 0.5rem;
 `;
 
 const StyledButton = styled.button`
-  margin-left: 0.5rem;
+  border: none;
+  background-color: transparent;
+  color: #fff;
 `;
 
 const MessageBubble = styled.div`
@@ -293,16 +299,19 @@ function ChatInterface({ userName, visitorId }) {
       {/* Small File Preview */}
       {attachment && (
         <PreviewContainer>
-          <h6>Previzualizare {previewUrl ? 'imagine' : 'document'}</h6>
-          <div></div>
-          {previewUrl ? (
-            <img src={previewUrl} width="100" />
-          ) : (
-            <div>{attachment.name}</div>
-          )}
-          <StyledButton type="button" onClick={clearAttachment}>
-            <FontAwesomeIcon icon={faXmark} />
-          </StyledButton>
+          <PreviewP>
+            Previzualizare {previewUrl ? 'imagine' : 'document'}
+          </PreviewP>
+          <PreviewContent>
+            {previewUrl ? (
+              <img src={previewUrl} width="100" />
+            ) : (
+              <div>{attachment.name}</div>
+            )}
+            <StyledButton type="button" onClick={clearAttachment}>
+              <FontAwesomeIcon icon={faXmark} />
+            </StyledButton>
+          </PreviewContent>
         </PreviewContainer>
       )}
 
