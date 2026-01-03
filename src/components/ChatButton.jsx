@@ -46,10 +46,10 @@ function ChatButton({ onOpenForm }) {
 
   return (
     <ChatButtonContainer>
-      {!isChatOpen ? (
-        <ChatMessage>Discută cu un reprezentant Edion Trans!</ChatMessage>
-      ) : (
+      {isChatOpen ? (
         ''
+      ) : (
+        <ChatMessage>Discută cu un reprezentant Edion Trans!</ChatMessage>
       )}
 
       <StyledButton onClick={() => handleChatOpen()}>
