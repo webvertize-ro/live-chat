@@ -33,7 +33,7 @@ const StyledSendButton = styled.button`
 `;
 
 const Spinner = styled.div`
-  color: rgba(9, 78, 46, 0.8);
+  color: rgb(9, 78, 46);
 `;
 
 const StyledFontAwesomeIcon = styled(FontAwesomeIcon)``;
@@ -185,7 +185,6 @@ function ChatInterface({ userName, visitorId }) {
   };
 
   // Fetch messages initially
-
   useEffect(() => {
     const fetchMessages = async () => {
       if (!visitorId) return;
