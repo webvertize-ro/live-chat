@@ -186,7 +186,7 @@ const SendMessageForm = styled.form`
   align-items: center;
 `;
 
-function ChatInterface({ userName, visitorId }) {
+function ChatInterface({ userName, visitorId, onOpenForm }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [attachment, setAttachment] = useState(null);
@@ -334,6 +334,7 @@ function ChatInterface({ userName, visitorId }) {
         <HeaderMessage>
           <StyledP>Bun venit, {userName}!</StyledP>
         </HeaderMessage>
+        <button onClick={() => onOpenForm()}>minimize</button>
       </Header>
       {/* Container with messages */}
       <Messages loadingMessages={loadingMessages}>
