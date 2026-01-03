@@ -392,9 +392,7 @@ function ChatInterface({ userName, visitorId }) {
           />
           <StyledSendButton
             type="submit"
-            disabled={
-              !input || !attachment || loadingSendMessage ? true : false
-            }
+            disabled={(!input && !attachment) || loadingSendMessage}
           >
             {loadingSendMessage ? (
               <Spinner
