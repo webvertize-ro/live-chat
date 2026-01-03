@@ -21,7 +21,7 @@ const StyledChatForm = styled.form`
   background-color: rgba(42, 105, 83, 0.8);
   border: 3px solid rgba(130, 185, 160, 0.9);
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-  color: #000;
+  color: #fff;
 `;
 
 const LoadingComponentContainer = styled.div`
@@ -61,7 +61,7 @@ const WelcomeInfo = styled.p`
   align-items: center;
   gap: 0.2rem;
   text-align: center;
-  color: rgb(75 85 99);
+  color: #fff;
 `;
 
 const StyledSpan = styled.span`
