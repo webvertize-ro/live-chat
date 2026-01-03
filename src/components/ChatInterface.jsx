@@ -268,6 +268,15 @@ function ChatInterface({ userName, visitorId }) {
       fileData = await uploadRes.json();
     }
 
+    // determine the type of message
+    let messageType = 'text';
+
+    if (attachment && input) {
+      messageType = 'mixed';
+    } else if (attachment) {
+      messageType = attachment.type.startsWith('image') ? 'image' : 'file';
+    }
+
     // Send message (text + optional file)
     await fetch('/api/sendMessage', {
       method: 'POST',
@@ -277,11 +286,7 @@ function ChatInterface({ userName, visitorId }) {
         message: input || null,
         sender_type: 'user',
         visitor_id: visitorId,
-        type: attachment
-          ? attachment.type.startsWith('image')
-            ? 'image'
-            : 'file'
-          : 'text',
+        type: messageType,
         file_url: fileData?.url,
         file_name: fileData?.name,
         file_mime: fileData?.mime,
@@ -333,12 +338,14 @@ function ChatInterface({ userName, visitorId }) {
             <MessageBubble key={i} senderType={msg.sender_type}>
               <strong>{msg.user_name}:</strong>
               <MessageContent>
-                {msg.type === 'text' && <Message>{msg.message}</Message>}
-                {msg.type === 'image' && (
-                  <img src={msg.file_url} alt={msg.file_name} width="100" />
+                {msg.message && <Message>{msg.message}</Message>}
+
+                {msg.file_url && msg.type === 'image' && (
+                  <img src={msg.file_url} alt={msg.file_name} width="80" />
                 )}
-                {msg.type === 'file' && (
-                  <a href={msg.file_url} target="_blank">
+
+                {msg.file_url && msg.type !== 'image' && (
+                  <a href={msg.file_url} target="_blank" rel="noreferrer">
                     {msg.file_name}
                   </a>
                 )}
@@ -383,10 +390,15 @@ function ChatInterface({ userName, visitorId }) {
             onChange={(e) => setInput(e.target.value)}
             className="form-control"
           />
-          <StyledSendButton type="submit" disabled={!input ? true : false}>
+          <StyledSendButton
+            type="submit"
+            disabled={
+              !input || !attachment || loadingSendMessage ? true : false
+            }
+          >
             {loadingSendMessage ? (
               <Spinner
-                className="spinner-border spinner-border-md"
+                className="spinner-border spinner-border-sm"
                 role="status"
               >
                 <span className="visually-hidden">Loading...</span>
