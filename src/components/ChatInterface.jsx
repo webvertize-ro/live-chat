@@ -338,8 +338,6 @@ function ChatInterface({ userName, visitorId }) {
             <MessageBubble key={i} senderType={msg.sender_type}>
               <strong>{msg.user_name}:</strong>
               <MessageContent>
-                {msg.message && <Message>{msg.message}</Message>}
-
                 {msg.file_url && msg.type === 'image' && (
                   <img src={msg.file_url} alt={msg.file_name} width="80" />
                 )}
@@ -349,6 +347,8 @@ function ChatInterface({ userName, visitorId }) {
                     {msg.file_name}
                   </a>
                 )}
+
+                {msg.message && <Message>{msg.message}</Message>}
                 <MessageDate>{formatDate(msg.created_at)}</MessageDate>
               </MessageContent>
             </MessageBubble>
