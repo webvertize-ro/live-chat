@@ -79,6 +79,8 @@ const PreviewContent = styled.div`
 const ImageAndName = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   color: #fff;
 `;
 
