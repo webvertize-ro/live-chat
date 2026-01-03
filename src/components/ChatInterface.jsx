@@ -213,7 +213,7 @@ function ChatInterface({ userName, visitorId }) {
 
       setLoadingMessages(false);
       // Scroll immediately after initial load
-      setTimeout(() => scrollToBottom('auto'), 200);
+      setTimeout(() => scrollToBottom('smooth'), 200);
     };
     fetchMessages();
   }, [visitorId]);
