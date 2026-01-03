@@ -33,7 +33,7 @@ const StyledSendButton = styled.button`
 `;
 
 const Spinner = styled.div`
-  color: black;
+  color: rgba(9, 78, 46, 0.8);
 `;
 
 const StyledFontAwesomeIcon = styled(FontAwesomeIcon)``;
