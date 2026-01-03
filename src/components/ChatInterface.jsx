@@ -28,9 +28,13 @@ const StyledSendButton = styled.button`
   border: none;
   padding: 0.5rem;
   border-radius: 0.25rem;
-  background-color: ${(props) =>
-    props.disabled ? 'rgba(227 116 52 0.2)' : 'rgba(227 116 52 1)'};
   color: #fff;
+  background-color: rgba(227, 116, 52, 1);
+  &:disabled {
+    background-color: rgba(227, 116, 52, 0.45);
+    cursor: not-allowed;
+    opacity: 0.9;
+  }
 `;
 
 const Spinner = styled.div`
