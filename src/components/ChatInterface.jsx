@@ -386,7 +386,7 @@ function ChatInterface({ userName, visitorId }) {
           <StyledSendButton type="submit" disabled={!input ? true : false}>
             {loadingSendMessage ? (
               <Spinner
-                className="spinner-border spinner-border-sm"
+                className="spinner-border spinner-border-md"
                 role="status"
               >
                 <span className="visually-hidden">Loading...</span>
