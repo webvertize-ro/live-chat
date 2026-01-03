@@ -71,6 +71,11 @@ const HeaderTop = styled.div`
   }
 `;
 
+const HeaderTopText = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const LogoImg = styled.img`
   width: 30px;
 `;
@@ -348,10 +353,10 @@ function ChatInterface({ userName, visitorId, onOpenForm }) {
       {/* Header */}
       <Header>
         <HeaderTop>
-          <div>
+          <HeaderTopText>
             <LogoImg src={edionTransLogo} />
             <StyledH5>Asistență clienți</StyledH5>
-          </div>
+          </HeaderTopText>
           <MinimizeButton onClick={() => onOpenForm()}>
             <FontAwesomeIcon icon={faWindowMinimize} />
           </MinimizeButton>
