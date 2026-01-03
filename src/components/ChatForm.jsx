@@ -19,7 +19,7 @@ const StyledChatForm = styled.form`
   padding: 1rem;
   border: 3px solid rgba(130, 185, 160, 0.9);
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-  color: #fff;
+  color: #000;
 
   @media (max-width: 576px) {
     bottom: 70px;
@@ -72,6 +72,7 @@ const StyledSmall = styled.small`
   margin-top: -12px;
   text-transform: uppercase;
   font-size: 1rem;
+  color: #000;
 `;
 
 const StyledButton = styled.button`
