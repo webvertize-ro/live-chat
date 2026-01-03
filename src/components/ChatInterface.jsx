@@ -25,6 +25,11 @@ const StyledInput = styled.input`
 
 const StyledSendButton = styled.button`
   font-size: 1.2rem;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: #e37434;
+  color: #fff;
 `;
 
 const StyledFontAwesomeIcon = styled(FontAwesomeIcon)``;
@@ -345,7 +350,7 @@ function ChatInterface({ userName, visitorId }) {
             onChange={(e) => setInput(e.target.value)}
             className="form-control"
           />
-          <StyledSendButton type="submit" className="btn btn-primary">
+          <StyledSendButton type="submit">
             {loadingSendMessage ? (
               <div
                 className="spinner-border spinner-border-sm text-info"
