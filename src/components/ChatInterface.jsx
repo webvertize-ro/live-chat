@@ -219,7 +219,7 @@ function ChatInterface({ userName, visitorId, onOpenForm }) {
 
       setLoadingMessages(false);
       // Scroll immediately after initial load
-      setTimeout(() => scrollToBottom('smooth'), 200);
+      setTimeout(() => scrollToBottom('smooth'), 400);
     };
     fetchMessages();
   }, [visitorId]);
