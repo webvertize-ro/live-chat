@@ -348,8 +348,10 @@ function ChatInterface({ userName, visitorId, onOpenForm }) {
       {/* Header */}
       <Header>
         <HeaderTop>
-          <LogoImg src={edionTransLogo} />
-          <StyledH5>Asistență clienți</StyledH5>
+          <div>
+            <LogoImg src={edionTransLogo} />
+            <StyledH5>Asistență clienți</StyledH5>
+          </div>
           <MinimizeButton onClick={() => onOpenForm()}>
             <FontAwesomeIcon icon={faWindowMinimize} />
           </MinimizeButton>
