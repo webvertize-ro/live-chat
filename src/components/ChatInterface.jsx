@@ -35,7 +35,7 @@ const Header = styled.div`
   padding: 0.75rem;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  background-color: rgb(148, 185, 54);
+  background-color: rgba(148, 185, 54, 0.8);
   border-bottom: 2px solid #fff;
   color: black;
 `;
@@ -90,7 +90,7 @@ const Messages = styled.div`
   gap: 0.8rem;
   height: 400px;
   overflow-y: scroll;
-  background-color: rgb(9, 78, 46);
+  background-color: rgba(9, 78, 46, 0.8);
   padding: 1rem;
 
   &::-webkit-scrollbar {
@@ -152,7 +152,7 @@ const Footer = styled.div`
   justify-content: center;
   border-top: 2px solid #fff;
   padding: 0.5rem;
-  background-color: #519872;
+  background-color: rgba(81, 152, 114, 0.8);
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
 `;
