@@ -22,6 +22,12 @@ const StyledChatForm = styled.form`
   border: 3px solid rgba(130, 185, 160, 0.9);
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   color: #fff;
+
+  @media (max-width: 576px) {
+    bottom: 70px;
+    right: 30px;
+    width: 300px;
+  }
 `;
 
 const Logo = styled.img`
