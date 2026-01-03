@@ -28,7 +28,8 @@ const StyledSendButton = styled.button`
   border: none;
   padding: 0.5rem;
   border-radius: 0.25rem;
-  background-color: #e37434;
+  background-color: ${(props) =>
+    props.disabled ? 'rgba(227 116 52 0.2)' : 'rgba(227 116 52 1)'};
   color: #fff;
 `;
 
