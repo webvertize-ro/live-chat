@@ -68,6 +68,11 @@ const PreviewP = styled.p`
   color: #fff;
 `;
 
+const PreviewContent = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const Messages = styled.div`
   display: flex;
   flex-direction: column;
