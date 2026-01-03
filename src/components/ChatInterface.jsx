@@ -64,13 +64,15 @@ const StyledP = styled.p`
 `;
 
 const PreviewP = styled.p`
-  margin: 0 !important;
+  margin-bottom: 0.5rem;
   color: #fff;
 `;
 
 const PreviewContent = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 1rem;
 `;
 
 const Messages = styled.div`
