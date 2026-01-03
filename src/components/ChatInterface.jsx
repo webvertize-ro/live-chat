@@ -344,15 +344,13 @@ function ChatInterface({ userName, visitorId }) {
             <MessageBubble key={i} senderType={msg.sender_type}>
               <strong>{msg.user_name}:</strong>
               <MessageContent>
-                {msg.file_url && msg.type === 'image' && (
-                  <img src={msg.file_url} alt={msg.file_name} width="80" />
-                )}
-
-                {msg.file_url && msg.type !== 'image' && (
+                {msg.file_url && msg.file_mime?.startsWith('image/') ? (
+                  <img src={msg.file_url} alt={msg.file_name} width="100" />
+                ) : msg.file_url ? (
                   <a href={msg.file_url} target="_blank" rel="noreferrer">
                     {msg.file_name}
                   </a>
-                )}
+                ) : null}
 
                 {msg.message && <Message>{msg.message}</Message>}
                 <MessageDate>{formatDate(msg.created_at)}</MessageDate>
