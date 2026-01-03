@@ -76,6 +76,12 @@ const PreviewContent = styled.div`
   gap: 1rem;
 `;
 
+const ImageAndName = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+`;
+
 const Messages = styled.div`
   display: flex;
   flex-direction: column;
@@ -312,10 +318,10 @@ function ChatInterface({ userName, visitorId }) {
           </PreviewP>
           <PreviewContent>
             {previewUrl ? (
-              <>
+              <ImageAndName>
                 <img src={previewUrl} width="100" />
                 <div>{attachment.name}</div>
-              </>
+              </ImageAndName>
             ) : (
               <div>{attachment.name}</div>
             )}
