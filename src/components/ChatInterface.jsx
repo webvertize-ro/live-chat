@@ -314,7 +314,7 @@ function ChatInterface({ userName, visitorId }) {
             {previewUrl ? (
               <>
                 <img src={previewUrl} width="100" />
-                <div>{attachment}</div>
+                <div>{attachment.name}</div>
               </>
             ) : (
               <div>{attachment.name}</div>
