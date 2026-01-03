@@ -123,6 +123,7 @@ const Messages = styled.div`
   gap: 0.8rem;
   height: 400px;
   overflow-y: scroll;
+  overflow-x: hidden;
   background-color: rgba(9, 78, 46, 0.8);
   padding: 1rem;
 
@@ -167,6 +168,14 @@ const MessageBubble = styled.div`
 const MessageContent = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const StyledLink = styled.a`
+  max-width: 325px;
+
+  @media (max-width: 576px) {
+    max-width: 250px;
+  }
 `;
 
 const Message = styled.div`
@@ -360,9 +369,13 @@ function ChatInterface({ userName, visitorId, onOpenForm }) {
                 {msg.file_url && msg.file_mime?.startsWith('image/') ? (
                   <img src={msg.file_url} alt={msg.file_name} width="100" />
                 ) : msg.file_url ? (
-                  <a href={msg.file_url} target="_blank" rel="noreferrer">
+                  <StyledLink
+                    href={msg.file_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {msg.file_name}
-                  </a>
+                  </StyledLink>
                 ) : null}
 
                 {msg.message && <Message>{msg.message}</Message>}
