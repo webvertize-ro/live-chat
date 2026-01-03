@@ -18,6 +18,12 @@ const StyledChatInterface = styled.div`
   border-radius: 1rem;
   background-color: lightblue;
   color: #000;
+
+  @media (max-width: 576px) {
+    bottom: 10px;
+    right: 10px;
+    width: 300px;
+  }
 `;
 
 const StyledInput = styled.input`
