@@ -18,8 +18,8 @@ const StyledChatForm = styled.form`
   justify-content: ${(props) => (props.isLoading ? 'center' : 'unset')};
   border-radius: 1rem;
   padding: 1rem;
-  background-color: #fff;
-  border: 3px solid #1ca079;
+  background-color: rgba(42, 105, 83, 0.8);
+  border: 3px solid rgba(130, 185, 160, 0.9);
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   color: #000;
 `;
