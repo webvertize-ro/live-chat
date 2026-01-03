@@ -20,8 +20,8 @@ const StyledChatInterface = styled.div`
   color: #000;
 
   @media (max-width: 576px) {
-    bottom: 50px;
-    right: 20px;
+    bottom: 70px;
+    right: 30px;
     width: 300px;
   }
 `;
