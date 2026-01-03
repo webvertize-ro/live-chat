@@ -24,12 +24,6 @@ const StyledChatForm = styled.form`
   color: #fff;
 `;
 
-const LoadingComponentContainer = styled.div`
-  position: absolute;
-  right: 200px;
-  bottom: 100px;
-`;
-
 const Logo = styled.img`
   width: 50px;
 `;
