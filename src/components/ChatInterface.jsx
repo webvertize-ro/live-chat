@@ -66,6 +66,7 @@ const StyledP = styled.p`
 const PreviewP = styled.p`
   margin-bottom: 0.5rem;
   color: #fff;
+  text-align: center;
 `;
 
 const PreviewContent = styled.div`
@@ -311,7 +312,10 @@ function ChatInterface({ userName, visitorId }) {
           </PreviewP>
           <PreviewContent>
             {previewUrl ? (
-              <img src={previewUrl} width="100" />
+              <>
+                <img src={previewUrl} width="100" />
+                <div>{attachment}</div>
+              </>
             ) : (
               <div>{attachment.name}</div>
             )}
