@@ -65,6 +65,7 @@ const HeaderTop = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  justify-content: space-between;
 
   @media (max-width: 576px) {
     justify-content: space-between;
