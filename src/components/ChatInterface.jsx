@@ -173,6 +173,11 @@ const MessageBubble = styled.div`
     props.senderType === 'admin' ? 'rgb(28, 160, 121)' : 'rgb(254, 252, 105)'};
 `;
 
+const MessageBubbleStrong = styled.strong`
+  display: flex;
+  gap: 0.25rem;
+`;
+
 const MessageContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -375,14 +380,14 @@ function ChatInterface({ userName, visitorId, onOpenForm }) {
         ) : (
           messages.map((msg, i) => (
             <MessageBubble key={i} senderType={msg.sender_type}>
-              <strong className="d-flex gap-1">
+              <MessageBubbleStrong className="d-flex gap-1">
                 {msg.sender_type === 'admin' ? (
                   <img src={edionTransLogo} width="25" />
                 ) : (
                   ''
                 )}
                 {msg.user_name}
-              </strong>
+              </MessageBubbleStrong>
               <MessageContent>
                 {msg.file_url && msg.file_mime?.startsWith('image/') ? (
                   <img src={msg.file_url} alt={msg.file_name} width="100" />
