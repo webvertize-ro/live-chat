@@ -169,6 +169,8 @@ const MessageBubble = styled.div`
   padding: 0.5rem;
   align-self: ${(props) =>
     props.senderType === 'user' ? 'flex-end' : 'flex-start'};
+  background-color: ${(props) =>
+    props.senderType === 'admin' ? 'rgb(28, 160, 121)' : 'rgb(254, 252, 105)'};
 `;
 
 const MessageContent = styled.div`
