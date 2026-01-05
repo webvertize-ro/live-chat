@@ -164,7 +164,7 @@ const MessageBubble = styled.div`
   flex-direction: column;
   align-items: flex-start;
   background-color: #fff;
-  color: #3b5249;
+  color: ${(props) => (props.senderType === 'admin' ? '#fff' : '#3b5249')};
   border-radius: 1rem;
   padding: 0.5rem;
   align-self: ${(props) =>
@@ -375,7 +375,14 @@ function ChatInterface({ userName, visitorId, onOpenForm }) {
         ) : (
           messages.map((msg, i) => (
             <MessageBubble key={i} senderType={msg.sender_type}>
-              <strong>{msg.user_name}:</strong>
+              <strong>
+                {msg.sender_type === 'admin' ? (
+                  <img src={edionTransLogo} width="25" />
+                ) : (
+                  ''
+                )}
+                {msg.user_name}
+              </strong>
               <MessageContent>
                 {msg.file_url && msg.file_mime?.startsWith('image/') ? (
                   <img src={msg.file_url} alt={msg.file_name} width="100" />
