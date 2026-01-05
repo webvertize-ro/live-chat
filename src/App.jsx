@@ -23,15 +23,25 @@ console.log('the error is: ', error);
 
 function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   function handleOpenForm() {
     setIsFormOpen(!isFormOpen);
   }
 
+  function handleChatOpen() {
+    setIsChatOpen((prev) => !prev);
+    handleOpenForm();
+  }
+
   return (
     <StyledChatContainer>
-      {isFormOpen ? <ChatForm onOpenForm={handleOpenForm} /> : ''}
-      <ChatButton onOpenForm={handleOpenForm} />
+      {isFormOpen ? (
+        <ChatForm onOpenForm={handleOpenForm} onChatOpen={handleChatOpen} />
+      ) : (
+        ''
+      )}
+      <ChatButton onChatOpen={handleChatOpen} isChatOpen={isChatOpen} />
     </StyledChatContainer>
   );
 }

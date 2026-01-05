@@ -37,13 +37,7 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
   color: #fff;
 `;
 
-function ChatButton({ onOpenForm }) {
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  function handleChatOpen() {
-    setIsChatOpen((prev) => !prev);
-    onOpenForm();
-  }
-
+function ChatButton({ onChatOpen, isChatOpen }) {
   return (
     <ChatButtonContainer>
       {isChatOpen ? (
@@ -52,7 +46,7 @@ function ChatButton({ onOpenForm }) {
         <ChatMessage>Discută cu un reprezentant Edion Trans!</ChatMessage>
       )}
 
-      <StyledButton onClick={() => handleChatOpen()}>
+      <StyledButton onClick={() => onChatOpen()}>
         <StyledFontAwesomeIcon icon={faComments} />
       </StyledButton>
     </ChatButtonContainer>

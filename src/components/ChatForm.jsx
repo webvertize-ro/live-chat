@@ -85,7 +85,7 @@ const StyledButton = styled.button`
   border-radius: 0.5rem;
 `;
 
-function ChatForm({ onOpenForm }) {
+function ChatForm({ onOpenForm, onChatOpen }) {
   const [visitor, setVisitor] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -214,6 +214,7 @@ function ChatForm({ onOpenForm }) {
       userName={visitor.name}
       visitorId={visitor.id}
       onOpenForm={onOpenForm}
+      onChatOpen={onChatOpen}
     />
   );
 }

@@ -220,7 +220,7 @@ const SendMessageForm = styled.form`
   align-items: center;
 `;
 
-function ChatInterface({ userName, visitorId, onOpenForm }) {
+function ChatInterface({ userName, visitorId, onOpenForm, onChatOpen }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [attachment, setAttachment] = useState(null);
@@ -366,7 +366,7 @@ function ChatInterface({ userName, visitorId, onOpenForm }) {
             <LogoImg src={edionTransLogo} />
             <StyledH5>Asistență clienți</StyledH5>
           </HeaderTopText>
-          <MinimizeButton onClick={() => onOpenForm()}>
+          <MinimizeButton onClick={() => onChatOpen()}>
             <FontAwesomeIcon icon={faWindowMinimize} />
           </MinimizeButton>
         </HeaderTop>
