@@ -375,7 +375,7 @@ function ChatInterface({ userName, visitorId, onOpenForm }) {
         ) : (
           messages.map((msg, i) => (
             <MessageBubble key={i} senderType={msg.sender_type}>
-              <strong>
+              <strong className="d-flex gap-1">
                 {msg.sender_type === 'admin' ? (
                   <img src={edionTransLogo} width="25" />
                 ) : (
