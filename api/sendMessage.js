@@ -42,6 +42,16 @@ export default async function handler(req, res) {
     .select()
     .single();
 
+  if (sender_type === 'user') {
+    const { error: rpcError } = await supabase.rpc('increment_unread_count', {
+      v_id: visitor_id,
+    });
+
+    if (rpcError) {
+      console.error(rpcError);
+    }
+  }
+
   if (error) {
     console.error(error);
     return res.status(500).json({ error: 'Database error' });
