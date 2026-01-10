@@ -186,6 +186,13 @@ const MessageContent = styled.div`
   flex-direction: column;
 `;
 
+const ChatImg = styled.img`
+  border-radius: 0.5rem;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const StyledLink = styled.a`
   max-width: 325px;
   word-wrap: break-word;
@@ -404,7 +411,7 @@ function ChatInterface({ userName, visitorId, onOpenForm, onChatOpen }) {
               </MessageBubbleStrong>
               <MessageContent>
                 {msg.file_url && msg.file_mime?.startsWith('image/') ? (
-                  <img
+                  <ChatImg
                     src={msg.file_url}
                     alt={msg.file_name}
                     width="100"
