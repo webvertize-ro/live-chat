@@ -9,6 +9,8 @@ import { faX } from '@fortawesome/free-solid-svg-icons/faX';
 import FileInput from './FileInput';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import LoadingComponent from './LoadingComponent';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
 
 const StyledChatInterface = styled.div`
   position: absolute;
@@ -228,6 +230,17 @@ function ChatInterface({ userName, visitorId, onOpenForm, onChatOpen }) {
   const [loadingSendMessage, setLoadingSendMessage] = useState(false);
   const [loadingMessages, setLoadingMessages] = useState(false);
   const messagesEndRef = useRef(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const imageMessages = messages.filter(
+    (msg) => (msg.file_url && msg.file_mime.startsWith('image/')) || []
+  );
+
+  const slides = imageMessages.map((msg) => ({
+    src: msg.file_url,
+    alt: msg.file_name || 'Image',
+  }));
 
   const scrollToBottom = (behavior = 'smooth') => {
     messagesEndRef.current?.scrollIntoView({ behavior });
@@ -391,7 +404,18 @@ function ChatInterface({ userName, visitorId, onOpenForm, onChatOpen }) {
               </MessageBubbleStrong>
               <MessageContent>
                 {msg.file_url && msg.file_mime?.startsWith('image/') ? (
-                  <img src={msg.file_url} alt={msg.file_name} width="100" />
+                  <img
+                    src={msg.file_url}
+                    alt={msg.file_name}
+                    width="100"
+                    onClick={() => {
+                      const index = imageMessages.findIndex(
+                        (img) => img.file_url === msg.file_url
+                      );
+                      setLightboxIndex(index);
+                      setLightboxOpen(true);
+                    }}
+                  />
                 ) : msg.file_url ? (
                   <StyledLink
                     href={msg.file_url}
@@ -461,6 +485,13 @@ function ChatInterface({ userName, visitorId, onOpenForm, onChatOpen }) {
           </StyledSendButton>
         </SendMessageForm>
       </Footer>
+
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={slides}
+        index={lightboxIndex}
+      />
     </StyledChatInterface>
   );
 }
