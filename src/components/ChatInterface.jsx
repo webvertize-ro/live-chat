@@ -261,10 +261,10 @@ function ChatInterface({
   // Fetch messages initially
   useEffect(() => {
     const fetchMessages = async () => {
-      if (!visitorId) return;
+      if (!visitor.id) return;
       setLoadingMessages(true);
 
-      const res = await fetch(`/api/getMessages?visitor_id=${visitorId}`);
+      const res = await fetch(`/api/getMessages?visitor_id=${visitor.id}`);
       const data = await res.json();
       // fetched messages
 
@@ -275,7 +275,7 @@ function ChatInterface({
       setTimeout(() => scrollToBottom('smooth'), 400);
     };
     fetchMessages();
-  }, [visitorId]);
+  }, [visitor.id]);
 
   // Scroll when a new message arrives
   useEffect(() => {
@@ -285,17 +285,17 @@ function ChatInterface({
 
   // Subscribe to real-time
   useEffect(() => {
-    if (!visitorId) return;
+    if (!visitor.id) return;
 
     const channel = supabase
-      .channel(`messages-${visitorId}`)
+      .channel(`messages-${visitor.id}`)
       .on(
         'postgres_changes',
         {
           event: 'INSERT',
           schema: 'public',
           table: 'messages',
-          filter: `visitor_id=eq.${visitorId}`,
+          filter: `visitor_id=eq.${visitor.id}`,
         },
         (payload) => {
           setMessages((prev) => {
@@ -310,7 +310,7 @@ function ChatInterface({
     return () => {
       channel.unsubscribe();
     };
-  }, [visitorId]);
+  }, [visitor.id]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -323,7 +323,7 @@ function ChatInterface({
     if (attachment) {
       const formData = new FormData();
       formData.append('file', attachment);
-      formData.append('visitor_id', visitorId);
+      formData.append('visitor_id', visitor.id);
 
       const uploadRes = await fetch('/api/uploadAttachment', {
         method: 'POST',
@@ -396,7 +396,7 @@ function ChatInterface({
           </MinimizeButton>
         </HeaderTop>
         <HeaderMessage>
-          <StyledP>Bun venit, {userName}!</StyledP>
+          <StyledP>Bun venit, {visitor.name}!</StyledP>
         </HeaderMessage>
       </Header>
       {/* Container with messages */}
