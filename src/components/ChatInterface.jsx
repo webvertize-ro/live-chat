@@ -229,7 +229,12 @@ const SendMessageForm = styled.form`
   align-items: center;
 `;
 
-function ChatInterface({ userName, visitorId, onOpenForm, onChatOpen }) {
+function ChatInterface({
+  visitor,
+  onOpenForm,
+  onChatOpen,
+  onAcknowledgeNotification,
+}) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [attachment, setAttachment] = useState(null);
@@ -342,10 +347,10 @@ function ChatInterface({ userName, visitorId, onOpenForm, onChatOpen }) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        user_name: userName,
+        user_name: visitor.name,
         message: input || null,
         sender_type: 'user',
-        visitor_id: visitorId,
+        visitor_id: visitor.id,
         type: messageType,
         file_url: fileData?.url,
         file_name: fileData?.name,
@@ -474,6 +479,7 @@ function ChatInterface({ userName, visitorId, onOpenForm, onChatOpen }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             className="form-control"
+            onClick={() => onAcknowledgeNotification(visitor)}
           />
           <StyledSendButton
             type="submit"

@@ -148,6 +148,14 @@ function ChatForm({ onOpenForm, onChatOpen }) {
     }
   }
 
+  async function acknowledgeNotification(visitor) {
+    await fetch('/api/acknowledgeNotification', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ visitor_id: visitor.id }),
+    });
+  }
+
   return isLoading ? (
     <StyledChatForm onSubmit={handleSubmit(onSubmit)} isLoading={isLoading}>
       <LoadingComponent color="#094e2e" />
@@ -211,10 +219,10 @@ function ChatForm({ onOpenForm, onChatOpen }) {
     </StyledChatForm>
   ) : (
     <ChatInterface
-      userName={visitor.name}
-      visitorId={visitor.id}
+      visitor={visitor}
       onOpenForm={onOpenForm}
       onChatOpen={onChatOpen}
+      onAcknowledgeNotification={acknowledgeNotification}
     />
   );
 }
