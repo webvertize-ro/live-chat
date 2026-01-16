@@ -45,6 +45,7 @@ export default async function handler(req, res) {
   if (sender_type === 'user') {
     const { error: rpcError } = await supabase.rpc('increment_unread_count', {
       v_id: visitor_id,
+      sender_type: 'user',
     });
 
     if (rpcError) {
