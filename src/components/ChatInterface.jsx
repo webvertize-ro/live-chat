@@ -11,6 +11,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import LoadingComponent from './LoadingComponent';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
+import useUserNotifications from '../hooks/useUserNotifications';
 
 const StyledChatInterface = styled.div`
   position: absolute;
@@ -244,6 +245,11 @@ function ChatInterface({
   const messagesEndRef = useRef(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  useUserNotifications({
+    visitorId: visitor?.id,
+    soundEnabled: true, // later can be user setting
+  });
 
   const imageMessages = messages.filter(
     (msg) => (msg.file_url && msg.file_mime.startsWith('image/')) || []
