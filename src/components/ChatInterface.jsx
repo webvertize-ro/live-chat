@@ -106,6 +106,15 @@ const HeaderMessage = styled.div`
   flex-direction: column;
 `;
 
+const NotificationLabel = styled.label``;
+
+const NotificationButton = styled.button`
+  border: none;
+  background-color: transparent;
+  color: #1ca079;
+  font-size: 1.2rem;
+`;
+
 const StyledP = styled.p`
   margin: 0 !important;
 `;
