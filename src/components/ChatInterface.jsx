@@ -261,7 +261,7 @@ function ChatInterface({
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const { settings, loading, toggleNotificationSound } = useUserSettings();
-  const enabled = settings?.notification_sound_enabled ?? true;
+  const enabled = settings?.notification_sound_enabled ?? false;
 
   useUserNotifications({
     visitorId: visitor?.id,
