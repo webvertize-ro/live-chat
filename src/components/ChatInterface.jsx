@@ -17,7 +17,7 @@ import LoadingComponent from './LoadingComponent';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import useUserNotifications from '../hooks/useUserNotifications';
-import useUserSettings from '../hooks/useUserSettings';
+import { useUserSettings } from '../hooks/useUserSettings';
 
 const StyledChatInterface = styled.div`
   position: absolute;
