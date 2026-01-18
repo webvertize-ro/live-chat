@@ -434,7 +434,6 @@ function ChatInterface({
               )}
             </NotificationButton>
           </NotificationLabel>
-          <Logout />
         </div>
       </Header>
       {/* Container with messages */}
