@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function useAdminSettings() {
+export function useUserSettings() {
   const [settings, setSettings] = useState(null);
   const [loading, setLoading] = useState(true);
 
