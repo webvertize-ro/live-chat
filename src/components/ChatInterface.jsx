@@ -395,7 +395,7 @@ function ChatInterface({
     setPreviewUrl(null);
   };
 
-  const enabled = settings.notification_sound_enabled;
+  const enabled = settings?.notification_sound_enabled;
 
   return (
     <StyledChatInterface>
