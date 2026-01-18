@@ -261,10 +261,11 @@ function ChatInterface({
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const { settings, loading, toggleNotificationSound } = useUserSettings();
+  const enabled = settings?.notification_sound_enabled;
 
   useUserNotifications({
     visitorId: visitor?.id,
-    soundEnabled: true, // later can be user setting
+    soundEnabled: enabled, // later can be user setting
   });
 
   const imageMessages = messages.filter(
@@ -403,8 +404,6 @@ function ChatInterface({
     setAttachment(null);
     setPreviewUrl(null);
   };
-
-  const enabled = settings?.notification_sound_enabled;
 
   return (
     <StyledChatInterface>
