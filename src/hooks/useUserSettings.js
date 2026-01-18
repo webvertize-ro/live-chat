@@ -18,7 +18,7 @@ export function useUserSettings() {
   async function toggleNotificationSound(enabled) {
     setSettings((prev) => ({ ...prev, notification_sound_enabled: enabled }));
 
-    await fetch('/api/admin-settings', {
+    await fetch('/api/user-settings', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
