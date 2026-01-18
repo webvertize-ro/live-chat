@@ -424,6 +424,7 @@ function ChatInterface({
         <div className="d-flex align-items-center justify-content-center gap-2">
           <NotificationLabel>
             <NotificationButton
+              type="button"
               onClick={() => toggleNotificationSound(!enabled)}
             >
               {enabled ? (
