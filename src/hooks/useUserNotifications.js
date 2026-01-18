@@ -8,6 +8,12 @@ export default function useUserNotifications({
   const audioRef = useRef(null);
   const prevUnreadRef = useRef(0);
   const initializedRef = useRef(false);
+  const soundEnabledRef = useRef(soundEnabled);
+
+  // keep ref in sync
+  useEffect(() => {
+    soundEnabledRef.current = soundEnabled;
+  }, [soundEnabled]);
 
   // init audio
   useEffect(() => {
@@ -54,7 +60,7 @@ export default function useUserNotifications({
 
           if (
             initializedRef.current &&
-            soundEnabled &&
+            soundEnabledRef.current &&
             newUnread > prevUnread
           ) {
             audioRef.current?.play().catch(() => {});
@@ -68,5 +74,5 @@ export default function useUserNotifications({
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [visitorId, soundEnabled]);
+  }, [visitorId]);
 }
