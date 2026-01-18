@@ -3,7 +3,7 @@ import { supabase } from '../db/db';
 
 export default function useUserNotifications({
   visitorId,
-  soundEnabled = true,
+  soundEnabled = false,
 }) {
   const audioRef = useRef(null);
   const prevUnreadRef = useRef(0);
