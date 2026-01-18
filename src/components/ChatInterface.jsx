@@ -3,7 +3,12 @@ import edionTransLogo from '../assets/ediontrans_logo.svg';
 import { useEffect, useRef, useState } from 'react';
 import { formatDate } from '../utils/formatDate';
 import { supabase } from '../db/db';
-import { faWindowMinimize, faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  faVolumeHigh,
+  faVolumeXmark,
+  faWindowMinimize,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons/faX';
 import FileInput from './FileInput';
@@ -12,6 +17,7 @@ import LoadingComponent from './LoadingComponent';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import useUserNotifications from '../hooks/useUserNotifications';
+import useUserSettings from '../hooks/useUserSettings';
 
 const StyledChatInterface = styled.div`
   position: absolute;
@@ -245,6 +251,7 @@ function ChatInterface({
   const messagesEndRef = useRef(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const { settings, loading, toggleNotificationSound } = useUserSettings();
 
   useUserNotifications({
     visitorId: visitor?.id,
@@ -388,6 +395,8 @@ function ChatInterface({
     setPreviewUrl(null);
   };
 
+  const enabled = settings.notification_sound_enabled;
+
   return (
     <StyledChatInterface>
       {/* Header */}
@@ -404,6 +413,20 @@ function ChatInterface({
         <HeaderMessage>
           <StyledP>Bun venit, {visitor.name}!</StyledP>
         </HeaderMessage>
+        <div className="d-flex align-items-center justify-content-center gap-2">
+          <NotificationLabel>
+            <NotificationButton
+              onClick={() => toggleNotificationSound(!enabled)}
+            >
+              {enabled ? (
+                <FontAwesomeIcon icon={faVolumeHigh} />
+              ) : (
+                <FontAwesomeIcon icon={faVolumeXmark} />
+              )}
+            </NotificationButton>
+          </NotificationLabel>
+          <Logout />
+        </div>
       </Header>
       {/* Container with messages */}
       <Messages loadingMessages={loadingMessages}>
