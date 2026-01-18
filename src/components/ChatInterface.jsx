@@ -413,6 +413,18 @@ function ChatInterface({
           <HeaderTopText>
             <LogoImg src={edionTransLogo} />
             <StyledH5>Asistență clienți</StyledH5>
+            <NotificationLabel>
+              <NotificationButton
+                type="button"
+                onClick={() => toggleNotificationSound(!enabled)}
+              >
+                {enabled ? (
+                  <FontAwesomeIcon icon={faVolumeHigh} />
+                ) : (
+                  <FontAwesomeIcon icon={faVolumeXmark} />
+                )}
+              </NotificationButton>
+            </NotificationLabel>
           </HeaderTopText>
           <MinimizeButton onClick={() => onChatOpen()}>
             <FontAwesomeIcon icon={faWindowMinimize} />
@@ -421,20 +433,6 @@ function ChatInterface({
         <HeaderMessage>
           <StyledP>Bun venit, {visitor.name}!</StyledP>
         </HeaderMessage>
-        <div className="d-flex align-items-center justify-content-center gap-2">
-          <NotificationLabel>
-            <NotificationButton
-              type="button"
-              onClick={() => toggleNotificationSound(!enabled)}
-            >
-              {enabled ? (
-                <FontAwesomeIcon icon={faVolumeHigh} />
-              ) : (
-                <FontAwesomeIcon icon={faVolumeXmark} />
-              )}
-            </NotificationButton>
-          </NotificationLabel>
-        </div>
       </Header>
       {/* Container with messages */}
       <Messages loadingMessages={loadingMessages}>
