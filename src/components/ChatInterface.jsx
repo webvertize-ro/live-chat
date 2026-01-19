@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons/faX';
+import { faReply } from '@fortawesome/free-solid-svg-icons';
 import FileInput from './FileInput';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import LoadingComponent from './LoadingComponent';
@@ -539,7 +540,7 @@ function ChatInterface({
                     });
                   }}
                 >
-                  Răspunde
+                  <FontAwesomeIcon icon={faReply} />
                 </StyledReplyButton>
               </MessageBubble>
             );
