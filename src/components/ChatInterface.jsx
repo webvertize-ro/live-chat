@@ -529,7 +529,7 @@ function ChatInterface({
                     });
                   }}
                 >
-                  Reply
+                  Răspunde
                 </StyledButton>
               </MessageBubble>
             );
@@ -542,7 +542,7 @@ function ChatInterface({
       {replyTo && (
         <PreviewContainer>
           <div>
-            Replying to{' '}
+            Răspuns pentru{' '}
             <strong>
               {replyTo.sender_type === 'admin'
                 ? 'Edion Trans'
