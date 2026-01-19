@@ -195,12 +195,18 @@ const MessageBubble = styled.div`
 `;
 
 const StyledReplyButton = styled.button`
-  background-color: #1ca079;
-  color: #fff;
-  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(28, 160, 121);
+  color: rgb(255, 255, 255);
+  border-radius: 50%;
   top: -10px;
+  left: -10px;
   position: absolute;
   border: none;
+  font-size: 0.75rem;
+  padding: 5px;
 `;
 
 const MessageBubbleStrong = styled.strong`
