@@ -192,6 +192,11 @@ const MessageBubble = styled.div`
   background-color: ${(props) =>
     props.senderType === 'admin' ? 'rgb(28, 160, 121)' : 'rgb(254, 252, 105)'};
   position: relative;
+
+  &:hover .message-actions {
+    opacity: 1;
+    pointer-events: auto;
+  }
 `;
 
 const StyledReplyButton = styled.button`
@@ -541,6 +546,7 @@ function ChatInterface({
                 </MessageContent>
                 <StyledReplyButton
                   type="button"
+                  className="message-actions"
                   onClick={() => {
                     setReplyTo({
                       id: msg.id,
