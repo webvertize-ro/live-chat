@@ -263,9 +263,15 @@ function ChatInterface({
   const { settings, loading, toggleNotificationSound } = useUserSettings();
   const [soundEnabled, setSoundEnabled] = useState(false);
 
+  const hydratedRef = useRef(false);
+
   useEffect(() => {
-    if (settings?.notification_sound_enabled !== undefined) {
+    if (
+      !hydratedRef.current &&
+      settings?.notification_sound_enabled !== undefined
+    ) {
       setSoundEnabled(settings.notification_sound_enabled);
+      hydratedRef.current = true;
     }
   }, [settings]);
 
