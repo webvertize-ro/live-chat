@@ -543,7 +543,11 @@ function ChatInterface({
         <PreviewContainer>
           <div>
             Replying to{' '}
-            <strong>{replyTo.sender_type === 'admin' ? 'Admin' : 'You'}</strong>
+            <strong>
+              {replyTo.sender_type === 'admin'
+                ? 'Edion Trans'
+                : `Propriul mesaj`}
+            </strong>
           </div>
           <div>{replyTo.message}</div>
           <StyledButton type="button" onClick={() => setReplyTo(null)}>
