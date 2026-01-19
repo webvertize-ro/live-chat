@@ -261,7 +261,15 @@ function ChatInterface({
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const { settings, loading, toggleNotificationSound } = useUserSettings();
-  const enabled = settings?.notification_sound_enabled ?? false;
+  const [soundEnabled, setSoundEnabled] = useState(false);
+
+  useEffect(() => {
+    if (settings?.notification_sound_enabled !== undefined) {
+      setSoundEnabled(settings.notification_sound_enabled);
+    }
+  }, [settings]);
+
+  const enabled = soundEnabled;
 
   useUserNotifications({
     visitorId: visitor?.id,
@@ -269,7 +277,7 @@ function ChatInterface({
   });
 
   const imageMessages = messages.filter(
-    (msg) => (msg.file_url && msg.file_mime.startsWith('image/')) || []
+    (msg) => (msg.file_url && msg.file_mime.startsWith('image/')) || [],
   );
 
   const slides = imageMessages.map((msg) => ({
@@ -326,7 +334,7 @@ function ChatInterface({
             if (exists) return prev;
             return [...prev, payload.new];
           });
-        }
+        },
       )
       .subscribe();
 
@@ -416,7 +424,10 @@ function ChatInterface({
             <NotificationLabel>
               <NotificationButton
                 type="button"
-                onClick={() => toggleNotificationSound(!enabled)}
+                onClick={() => {
+                  setSoundEnabled((prev) => !prev);
+                  toggleNotificationSound(!soundEnabled);
+                }}
               >
                 {enabled ? (
                   <FontAwesomeIcon icon={faVolumeHigh} />
@@ -457,7 +468,7 @@ function ChatInterface({
                     width="100"
                     onClick={() => {
                       const index = imageMessages.findIndex(
-                        (img) => img.file_url === msg.file_url
+                        (img) => img.file_url === msg.file_url,
                       );
                       setLightboxIndex(index);
                       setLightboxOpen(true);
