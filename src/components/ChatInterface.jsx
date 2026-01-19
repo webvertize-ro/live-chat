@@ -486,8 +486,8 @@ function ChatInterface({
                     >
                       <strong>
                         {repliedMessage.sender_type === 'admin'
-                          ? 'Admin'
-                          : 'You'}
+                          ? 'Edion Trans'
+                          : `${msg.user_name}`}
                       </strong>
                       <div>{repliedMessage.message || 'Attachment'}</div>
                     </div>
