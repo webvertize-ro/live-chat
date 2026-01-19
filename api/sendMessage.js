@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
+  process.env.SUPABASE_SERVICE_ROLE_KEY,
 );
 
 export default async function handler(req, res) {
@@ -19,6 +19,7 @@ export default async function handler(req, res) {
     file_url,
     file_name,
     file_mime,
+    reply_to_message_id,
   } = req.body;
 
   if (!visitor_id || !sender_type) {
@@ -37,6 +38,7 @@ export default async function handler(req, res) {
         file_url,
         file_name,
         file_mime,
+        reply_to_message_id: reply_to_message_id ?? null,
       },
     ])
     .select()

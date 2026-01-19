@@ -262,6 +262,7 @@ function ChatInterface({
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const { settings, loading, toggleNotificationSound } = useUserSettings();
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [replyTo, setReplyTo] = useState(null);
 
   const hydratedRef = useRef(false);
 
@@ -391,12 +392,14 @@ function ChatInterface({
         file_url: fileData?.url,
         file_name: fileData?.name,
         file_mime: fileData?.mime,
+        reply_to_message_id: replyTo?.id ?? null,
       }),
     });
 
     // Reset UI
     setInput('');
     clearAttachment();
+    setReplyTo(null);
     setLoadingSendMessage(false);
   };
 
@@ -456,48 +459,98 @@ function ChatInterface({
         {loadingMessages ? (
           <LoadingComponent color="#094e2e" />
         ) : (
-          messages.map((msg, i) => (
-            <MessageBubble key={i} senderType={msg.sender_type}>
-              <MessageBubbleStrong className="d-flex gap-1">
-                {msg.sender_type === 'admin' ? (
-                  <img src={edionTransLogo} width="25" />
-                ) : (
-                  ''
-                )}
-                {msg.user_name}
-              </MessageBubbleStrong>
-              <MessageContent>
-                {msg.file_url && msg.file_mime?.startsWith('image/') ? (
-                  <ChatImg
-                    src={msg.file_url}
-                    alt={msg.file_name}
-                    width="100"
-                    onClick={() => {
-                      const index = imageMessages.findIndex(
-                        (img) => img.file_url === msg.file_url,
-                      );
-                      setLightboxIndex(index);
-                      setLightboxOpen(true);
-                    }}
-                  />
-                ) : msg.file_url ? (
-                  <StyledLink
-                    href={msg.file_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {msg.file_name}
-                  </StyledLink>
-                ) : null}
+          messages.map((msg, i) => {
+            const repliedMessage = msg.reply_to_message_id
+              ? messages.find((m) => m.id === msg.reply_to_message_id)
+              : null;
 
-                {msg.message && <Message>{msg.message}</Message>}
-                <MessageDate>{formatDate(msg.created_at)}</MessageDate>
-              </MessageContent>
-            </MessageBubble>
-          ))
+            return (
+              <MessageBubble key={msg.id} senderType={msg.sender_type}>
+                <MessageBubbleStrong className="d-flex gap-1">
+                  {msg.sender_type === 'admin' ? (
+                    <img src={edionTransLogo} width="25" />
+                  ) : null}
+                  {msg.user_name}
+                </MessageBubbleStrong>
+                <MessageContent>
+                  {/* replied message preview */}
+                  {repliedMessage && (
+                    <div
+                      style={{
+                        padding: '0.25rem 0.5rem',
+                        marginBottom: '0.25rem',
+                        borderLeft: '3px solid #ccc',
+                        fontSize: '0.9rem',
+                        opacity: 0.8,
+                      }}
+                    >
+                      <strong>
+                        {repliedMessage.sender_type === 'admin'
+                          ? 'Admin'
+                          : 'You'}
+                      </strong>
+                      <div>{repliedMessage.message || 'Attachment'}</div>
+                    </div>
+                  )}
+
+                  {msg.file_url && msg.file_mime?.startsWith('image/') ? (
+                    <ChatImg
+                      src={msg.file_url}
+                      alt={msg.file_name}
+                      width="100"
+                      onClick={() => {
+                        const index = imageMessages.findIndex(
+                          (img) => img.file_url === msg.file_url,
+                        );
+                        setLightboxIndex(index);
+                        setLightboxOpen(true);
+                      }}
+                    />
+                  ) : msg.file_url ? (
+                    <StyledLink
+                      href={msg.file_url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {msg.file_name}
+                    </StyledLink>
+                  ) : null}
+
+                  {msg.message && <Message>{msg.message}</Message>}
+                  <MessageDate>{formatDate(msg.created_at)}</MessageDate>
+                </MessageContent>
+                <StyledButton
+                  type="button"
+                  onClick={() => {
+                    setReplyTo({
+                      id: msg.id,
+                      message: msg.message,
+                      sender_type: msg.sender_type,
+                    });
+                  }}
+                >
+                  Reply
+                </StyledButton>
+              </MessageBubble>
+            );
+          })
         )}
         <div ref={messagesEndRef}></div>
       </Messages>
+
+      {/* reply to preview above the input */}
+      {replyTo && (
+        <PreviewContainer>
+          <div>
+            Replying to{' '}
+            <strong>{replyTo.sender_type === 'admin' ? 'Admin' : 'You'}</strong>
+          </div>
+          <div>{replyTo.message}</div>
+          <StyledButton type="button" onClick={() => setReplyTo(null)}>
+            <FontAwesomeIcon icon={faXmark} />
+          </StyledButton>
+        </PreviewContainer>
+      )}
 
       {/* Small File Preview */}
       {attachment && (
