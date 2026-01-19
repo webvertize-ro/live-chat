@@ -425,8 +425,9 @@ function ChatInterface({
               <NotificationButton
                 type="button"
                 onClick={() => {
-                  setSoundEnabled((prev) => !prev);
-                  toggleNotificationSound(!soundEnabled);
+                  const next = !soundEnabled;
+                  setSoundEnabled(next);
+                  toggleNotificationSound(next);
                 }}
               >
                 {enabled ? (
