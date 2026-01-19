@@ -190,6 +190,15 @@ const MessageBubble = styled.div`
     props.senderType === 'user' ? 'flex-end' : 'flex-start'};
   background-color: ${(props) =>
     props.senderType === 'admin' ? 'rgb(28, 160, 121)' : 'rgb(254, 252, 105)'};
+  position: relative;
+`;
+
+const StyledReplyButton = styled.button`
+  background-color: #1ca079;
+  color: #fff;
+  border-radius: 1rem;
+  top: -10px;
+  position: absolute;
 `;
 
 const MessageBubbleStrong = styled.strong`
@@ -519,7 +528,7 @@ function ChatInterface({
                   {msg.message && <Message>{msg.message}</Message>}
                   <MessageDate>{formatDate(msg.created_at)}</MessageDate>
                 </MessageContent>
-                <StyledButton
+                <StyledReplyButton
                   type="button"
                   onClick={() => {
                     setReplyTo({
@@ -530,7 +539,7 @@ function ChatInterface({
                   }}
                 >
                   Răspunde
-                </StyledButton>
+                </StyledReplyButton>
               </MessageBubble>
             );
           })
