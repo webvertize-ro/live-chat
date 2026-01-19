@@ -273,7 +273,7 @@ function ChatInterface({
 
   useUserNotifications({
     visitorId: visitor?.id,
-    soundEnabled: enabled,
+    soundEnabled,
   });
 
   const imageMessages = messages.filter(
