@@ -207,6 +207,9 @@ const StyledReplyButton = styled.button`
   border: none;
   font-size: 0.75rem;
   padding: 5px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
 `;
 
 const MessageBubbleStrong = styled.strong`
