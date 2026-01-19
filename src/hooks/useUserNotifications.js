@@ -9,10 +9,15 @@ export default function useUserNotifications({
   const prevUnreadRef = useRef(0);
   const initializedRef = useRef(false);
   const soundEnabledRef = useRef(soundEnabled);
+  const userEnabledSoundRef = useRef(false);
 
   // keep ref in sync
   useEffect(() => {
     soundEnabledRef.current = soundEnabled;
+  }, [soundEnabled]);
+
+  useEffect(() => {
+    userEnabledSoundRef.current = soundEnabled;
   }, [soundEnabled]);
 
   // init audio
@@ -60,14 +65,14 @@ export default function useUserNotifications({
 
           if (
             initializedRef.current &&
-            soundEnabledRef.current &&
+            userEnabledSoundRef.current &&
             newUnread > prevUnread
           ) {
             audioRef.current?.play().catch(() => {});
           }
 
           prevUnreadRef.current = newUnread;
-        }
+        },
       )
       .subscribe();
 

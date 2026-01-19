@@ -266,14 +266,13 @@ function ChatInterface({
   const hydratedRef = useRef(false);
 
   useEffect(() => {
-    if (
-      !hydratedRef.current &&
-      settings?.notification_sound_enabled !== undefined
-    ) {
-      setSoundEnabled(settings.notification_sound_enabled);
-      hydratedRef.current = true;
-    }
-  }, [settings]);
+    if (hydratedRef.current) return;
+
+    // default: sound OFF on first open
+    setSoundEnabled(false);
+
+    hydratedRef.current = true;
+  }, []);
 
   const enabled = soundEnabled;
 
