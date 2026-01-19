@@ -199,6 +199,7 @@ const StyledReplyButton = styled.button`
   border-radius: 1rem;
   top: -10px;
   position: absolute;
+  border: none;
 `;
 
 const MessageBubbleStrong = styled.strong`
