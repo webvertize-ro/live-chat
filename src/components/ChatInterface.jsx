@@ -170,6 +170,7 @@ const Messages = styled.div`
 
 const PreviewContainer = styled.div`
   display: flex;
+  justify-content: center;
   gap: 2rem;
   background-color: #75b06f;
   padding: 0.5rem;
@@ -180,7 +181,6 @@ const ReplyAndMessage = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
 `;
 
 const StyledButton = styled.button`
@@ -582,7 +582,19 @@ function ChatInterface({
             <div>
               Răspuns pentru <strong>"{replyTo.user_name}"</strong>
             </div>
-            <div>{replyTo.message}</div>
+            <div>
+              {replyTo.file_url ? (
+                replyTo.file_mime.startsWith('image/') ? (
+                  <img src={replyTo.file_url} width="60" />
+                ) : (
+                  <a href={replyTo.file_url} target="_blank">
+                    {replyTo.file_name}
+                  </a>
+                )
+              ) : (
+                replyTo.message
+              )}
+            </div>
           </ReplyAndMessage>
 
           <StyledButton type="button" onClick={() => setReplyTo(null)}>
