@@ -195,6 +195,11 @@ const ReplyToImg = styled.img`
   border-radius: 0.5rem;
 `;
 
+const FilePreviewImg = styled.img`
+  width: 60px;
+  border-radius: 0.5rem;
+`;
+
 const StyledButton = styled.button`
   border: none;
   background-color: transparent;
@@ -627,7 +632,7 @@ function ChatInterface({
           <PreviewContent>
             {previewUrl ? (
               <ImageAndName>
-                <img src={previewUrl} width="100" />
+                <FilePreviewImg src={previewUrl} width="100" />
                 <div>{attachment.name}</div>
               </ImageAndName>
             ) : (
