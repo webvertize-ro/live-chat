@@ -550,6 +550,7 @@ function ChatInterface({
                   onClick={() => {
                     setReplyTo({
                       id: msg.id,
+                      user_name: msg.user_name,
                       message: msg.message,
                       sender_type: msg.sender_type,
                     });
