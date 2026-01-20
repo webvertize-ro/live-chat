@@ -560,6 +560,9 @@ function ChatInterface({
                   onClick={() => {
                     setReplyTo({
                       id: msg.id,
+                      file_url: msg.file_url,
+                      file_name: msg.file_name,
+                      file_mime: msg.file_mime,
                       user_name: msg.user_name,
                       message: msg.message,
                       sender_type: msg.sender_type,
