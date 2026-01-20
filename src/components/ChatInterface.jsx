@@ -190,6 +190,11 @@ const ReplyAndMessage = styled.div`
   justify-content: center;
 `;
 
+const ReplyToImg = styled.img`
+  width: 60px;
+  border-radius: 0.5rem;
+`;
+
 const StyledButton = styled.button`
   border: none;
   background-color: transparent;
@@ -595,7 +600,7 @@ function ChatInterface({
             <div>
               {replyTo.file_url ? (
                 replyTo.file_mime.startsWith('image/') ? (
-                  <img src={replyTo.file_url} width="60" />
+                  <ReplyToImg src={replyTo.file_url} width="60" />
                 ) : (
                   <a href={replyTo.file_url} target="_blank">
                     {replyTo.file_name}
