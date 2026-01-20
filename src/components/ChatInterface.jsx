@@ -122,7 +122,7 @@ const StyledP = styled.p`
 
 const PreviewP = styled.p`
   margin-bottom: 0.5rem;
-  color: #fff;
+  color: #2f3e3a;
   text-align: center;
 `;
 
@@ -138,7 +138,7 @@ const ImageAndName = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  color: #fff;
+  color: #2f3e3a;
 `;
 
 const Messages = styled.div`
@@ -173,7 +173,8 @@ const PreviewContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f7f9f5;
+  /* background-color: #f7f9f5; */
+  background-color: purple;
 `;
 
 const ReplyToPreviewContainer = styled.div`
@@ -189,8 +190,6 @@ const ReplyAndMessage = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #2f3e3a;
-  font-weight: bold;
 `;
 
 const ReplyToImg = styled.img`
