@@ -173,8 +173,7 @@ const PreviewContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* background-color: #f7f9f5; */
-  background-color: purple;
+  background-color: #f7f9f5;
 `;
 
 const ReplyToPreviewContainer = styled.div`
@@ -190,6 +189,14 @@ const ReplyAndMessage = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+const ReplyFor = styled.div`
+  color: #2f3e3a;
+`;
+
+const FileDetails = styled.div`
+  color: #2f3e3a;
 `;
 
 const ReplyToImg = styled.img`
@@ -601,10 +608,10 @@ function ChatInterface({
       {replyTo && (
         <ReplyToPreviewContainer>
           <ReplyAndMessage>
-            <div>
+            <ReplyFor>
               Răspuns pentru <strong>{replyTo.user_name}</strong>
-            </div>
-            <div>
+            </ReplyFor>
+            <FileDetails>
               {replyTo.file_url ? (
                 replyTo.file_mime.startsWith('image/') ? (
                   <ReplyToImg src={replyTo.file_url} width="60" />
@@ -616,7 +623,7 @@ function ChatInterface({
               ) : (
                 <div>"{replyTo.message}"</div>
               )}
-            </div>
+            </FileDetails>
           </ReplyAndMessage>
 
           <StyledButton type="button" onClick={() => setReplyTo(null)}>
