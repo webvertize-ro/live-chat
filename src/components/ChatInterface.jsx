@@ -595,7 +595,7 @@ function ChatInterface({
                   </a>
                 )
               ) : (
-                <div>"replyTo.message"</div>
+                <div>"{replyTo.message}"</div>
               )}
             </div>
           </ReplyAndMessage>
