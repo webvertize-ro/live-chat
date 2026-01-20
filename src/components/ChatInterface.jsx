@@ -580,7 +580,7 @@ function ChatInterface({
         <PreviewContainer>
           <ReplyAndMessage>
             <div>
-              Răspuns pentru <strong>"{replyTo.user_name}"</strong>
+              Răspuns pentru <strong>{replyTo.user_name}</strong>
             </div>
             <div>
               {replyTo.file_url ? (
@@ -592,7 +592,7 @@ function ChatInterface({
                   </a>
                 )
               ) : (
-                replyTo.message
+                <div>"replyTo.message"</div>
               )}
             </div>
           </ReplyAndMessage>
