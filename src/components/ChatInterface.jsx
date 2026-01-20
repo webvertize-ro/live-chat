@@ -170,6 +170,13 @@ const Messages = styled.div`
 
 const PreviewContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ReplyToPreviewContainer = styled.div`
+  display: flex;
   justify-content: center;
   gap: 2rem;
   background-color: #75b06f;
@@ -578,9 +585,9 @@ function ChatInterface({
         <div ref={messagesEndRef}></div>
       </Messages>
 
-      {/* reply to preview above the input */}
+      {/* reply-to preview above the input */}
       {replyTo && (
-        <PreviewContainer>
+        <ReplyToPreviewContainer>
           <ReplyAndMessage>
             <div>
               Răspuns pentru <strong>{replyTo.user_name}</strong>
@@ -603,7 +610,7 @@ function ChatInterface({
           <StyledButton type="button" onClick={() => setReplyTo(null)}>
             <FontAwesomeIcon icon={faXmark} />
           </StyledButton>
-        </PreviewContainer>
+        </ReplyToPreviewContainer>
       )}
 
       {/* Small File Preview */}
