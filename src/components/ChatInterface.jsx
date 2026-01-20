@@ -568,12 +568,7 @@ function ChatInterface({
       {replyTo && (
         <PreviewContainer>
           <div>
-            Răspuns pentru{' '}
-            <strong>
-              {replyTo.sender_type === 'admin'
-                ? 'Edion Trans'
-                : `Propriul mesaj`}
-            </strong>
+            Răspuns pentru <strong>{replyTo.user_name}</strong>
           </div>
           <div>{replyTo.message}</div>
           <StyledButton type="button" onClick={() => setReplyTo(null)}>
