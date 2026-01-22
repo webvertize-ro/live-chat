@@ -127,7 +127,10 @@ function ChatForm({ onOpenForm, onChatOpen }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: visitor.name,
+          phoneNumber: visitor.phoneNumber,
+        }),
       });
       // Parse the JSON body
       const data = await res.json();

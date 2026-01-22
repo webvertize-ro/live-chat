@@ -2,12 +2,12 @@ import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
+  process.env.SUPABASE_SERVICE_ROLE_KEY,
 );
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { name, phoneNumber } = req.body;
+    const { name, phoneNumber, visitor_id } = req.body;
 
     // Validation
     if (!name || !phoneNumber) {
@@ -31,9 +31,32 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Database error' });
     }
 
+    // Inserting the pre-defined message in the messages table
+    const { dataM, errorM } = await supabase
+      .from('messages')
+      .insert([
+        {
+          user_name: 'Edion Trans',
+          message: 'Buna ziua! Cu ce va putem ajuta astazi?',
+          sender_type: 'admin',
+          visitor_id: visitor_id,
+          type: 'text',
+        },
+      ])
+      .select()
+      .single();
+
+    if (errorM) {
+      console.error(error);
+      return res.status(500).json({
+        error: 'Error inserting the pre-defined message in the database.',
+      });
+    }
+
     return res.status(200).json({
       success: true,
       visitor: data,
+      message: dataM,
     });
   }
 
