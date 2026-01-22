@@ -133,11 +133,6 @@ function ChatForm({ onOpenForm, onChatOpen }) {
           phoneNumber: formData.phoneNumber,
         }),
       });
-
-      console.log('sending visitor: ', {
-        name: visitor.name,
-        phoneNumber: visitor.phoneNumber,
-      });
       // Parse the JSON body
       const data = await res.json();
       console.log('API response: ', data);
