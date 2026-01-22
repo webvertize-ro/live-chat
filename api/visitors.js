@@ -7,7 +7,7 @@ const supabase = createClient(
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { name, phoneNumber, visitor_id } = req.body;
+    const { name, phoneNumber } = req.body;
 
     // Validation
     if (!name || !phoneNumber) {
@@ -32,31 +32,30 @@ export default async function handler(req, res) {
     }
 
     // Inserting the pre-defined message in the messages table
-    const { dataM, errorM } = await supabase
-      .from('messages')
-      .insert([
-        {
-          user_name: 'Edion Trans',
-          message: 'Buna ziua! Cu ce va putem ajuta astazi?',
-          sender_type: 'admin',
-          visitor_id: visitor_id,
-          type: 'text',
-        },
-      ])
-      .select()
-      .single();
+    // const { dataM, errorM } = await supabase
+    //   .from('messages')
+    //   .insert([
+    //     {
+    //       user_name: 'Edion Trans',
+    //       message: 'Buna ziua! Cu ce va putem ajuta astazi?',
+    //       sender_type: 'admin',
+    //       visitor_id: visitor_id,
+    //       type: 'text',
+    //     },
+    //   ])
+    //   .select()
+    //   .single();
 
-    if (errorM) {
-      console.error(error);
-      return res.status(500).json({
-        error: 'Error inserting the pre-defined message in the database.',
-      });
-    }
+    // if (errorM) {
+    //   console.error(error);
+    //   return res.status(500).json({
+    //     error: 'Error inserting the pre-defined message in the database.',
+    //   });
+    // }
 
     return res.status(200).json({
       success: true,
       visitor: data,
-      message: dataM,
     });
   }
 
