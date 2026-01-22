@@ -38,7 +38,7 @@ export default async function handler(req, res) {
       .insert([
         {
           user_name: 'Edion Trans',
-          message: 'Buna ziua! Cu ce va putem ajuta astazi?',
+          message: 'Bună ziua! Cu ce vă putem ajuta astăzi?',
           sender_type: 'admin',
           visitor_id: data.id,
           type: 'text',
