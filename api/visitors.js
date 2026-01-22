@@ -7,7 +7,7 @@ const supabase = createClient(
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { name, phoneNumber } = req.body;
+    const { name, phoneNumber, unread_count_admin } = req.body;
 
     // Validation
     if (!name || !phoneNumber) {
@@ -21,6 +21,7 @@ export default async function handler(req, res) {
         {
           name,
           phone_number: phoneNumber,
+          unread_count_admin,
         },
       ])
       .select()
