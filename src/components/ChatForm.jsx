@@ -129,8 +129,8 @@ function ChatForm({ onOpenForm, onChatOpen }) {
         },
 
         body: JSON.stringify({
-          name: visitor?.name,
-          phoneNumber: visitor?.phoneNumber,
+          name: formData.name,
+          phoneNumber: formData.phoneNumber,
         }),
       });
 
