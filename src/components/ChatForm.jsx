@@ -131,6 +131,7 @@ function ChatForm({ onOpenForm, onChatOpen }) {
         body: JSON.stringify({
           name: formData.name,
           phoneNumber: formData.phoneNumber,
+          unread_count_admin: 1
         }),
       });
       // Parse the JSON body
