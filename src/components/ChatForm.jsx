@@ -128,8 +128,8 @@ function ChatForm({ onOpenForm, onChatOpen }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: visitor.name,
-          phoneNumber: visitor.phoneNumber,
+          name: visitor?.name,
+          phoneNumber: visitor?.phoneNumber,
         }),
       });
       // Parse the JSON body
